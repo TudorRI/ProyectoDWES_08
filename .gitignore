@@ -1,0 +1,5 @@
+# Ignoramos la carpeta vendor
+/vendor/
+
+# Ignoramos el archivo .env
+.env
