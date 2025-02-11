@@ -1,6 +1,9 @@
 <?php 
 
 require '../config/config.php';
+require '../vendor/autoload.php';
+
+use Firebase\JWT\JWT;
 
 // Obtener datos del frontend
 $data = json_decode(file_get_contents("php://input"),true);
@@ -9,6 +12,15 @@ $lastname= $data['lastname'];
 $phone= $data['phone'];
 $email= $data['email'];
 $password= $data['password'];
+
+// Validacion de email unico
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->rowCount() > 0) {
+    http_response_code(400);
+    echo json_encode(["error" => "El email ya está registrado."]);
+    exit;
+}
 
 // Validación de datos
 if (empty($name) || empty($lastname) || empty($phone) || empty($email) || empty($password)) {
@@ -41,13 +53,27 @@ try {
     // Ejecuta la consulta
     $stmt->execute([$name, $lastname,$phone, $email, $hashed_password]);
 
+    $user_id = $pdo->lastInsertId();
+
+    $payload= [
+        "user_id" => $user_id,
+        "email" => $email,
+        "exp" => time() + 3600 // Expira en 1 hora
+    ];
+    $token = JWT::encode($payload, $jwtSecret, 'HS256');
+
     // Confirma la transacción
     $pdo->commit();
 
-    echo json_encode(["message" => "Usuario registrado exitosamente"]);
+    echo json_encode([
+        "message" => "Usuario registrado exitosamente",
+        "token" => $token
+    ]);
+
 } catch (Exception $e) {
     // Revierte la transacción si hay un error
     $pdo->rollBack();
+    http_response_code(500);
     echo json_encode(["error" => "Error al registrar el usuario: " . $e->getMessage()]);
 }
 ?>
