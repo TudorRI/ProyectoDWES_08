@@ -1,0 +1,108 @@
+/* Configuración de la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a2e1a; /* Verde oscuro para el fondo */
+}
+
+/* Contenedor principal dividido en dos secciones */
+.container {
+    display: flex;
+    width: auto;
+    max-width: 900px;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+}
+
+.checkbox {
+    display: flex;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    align-items: left;
+}
+
+/* Sección izquierda con el logo */
+.left-section {
+    background-color: #2d5a2d; /* Verde medio para la sección izquierda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.logo {
+    max-width: 60%; /* Ajusta según el tamaño del logo */
+    opacity: 0.9;
+}
+
+/* Sección derecha con el formulario */
+.right-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #2d5a2d; /* Verde medio para el título */
+}
+
+.checkbox {
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #2d5a2d; /* Verde medio para el botón */
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #1a2e1a; /* Verde oscuro para el hover del botón */
+}
+
+p {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+p a {
+    color: #2d5a2d; /* Verde medio para los enlaces */
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
