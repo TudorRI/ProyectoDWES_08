@@ -35,7 +35,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Validar que tenga exactamente 9 dígitos numéricos
-if (!preg_match('/^[0-9]{9}$/', $telefono)) {
+if (!preg_match('/^[0-9]{9}$/', $phone)) {
     http_response_code(400);
     echo json_encode(["error" => "Número de teléfono inválido"]);
     exit;
