@@ -1,9 +1,14 @@
 <?php 
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use Firebase\JWT\JWT;
+
 require '../config/config.php';
 require '../vendor/autoload.php';
 
-use Firebase\JWT\JWT;
 
 // Obtener datos del frontend
 $data = json_decode(file_get_contents("php://input"),true);
@@ -77,3 +82,4 @@ try {
     echo json_encode(["error" => "Error al registrar el usuario: " . $e->getMessage()]);
 }
 ?>
+

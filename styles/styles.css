@@ -1,4 +1,4 @@
-/* Configuración de la página */
+/* Configuración general */
 * {
     margin: 0;
     padding: 0;
@@ -6,107 +6,320 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1a2e1a; /* Verde oscuro para el fondo */
+    font-family: Arial, sans-serif;
+    background-color: #1a2e1a;
+    color: #333;
 }
 
-/* Contenedor principal dividido en dos secciones */
-.container {
-    display: flex;
-    width: auto;
-    max-width: 900px;
-    height: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #ffffff; /* Fondo blanco para el contenedor */
+/* Encabezado */
+header {
+    background-color: #2d5a2d;
+    padding: 20px;
+    text-align: center;
 }
 
-/* Sección izquierda con el logo */
-.left-section {
-    background-color: #2d5a2d; /* Verde medio para la sección izquierda */
+.header-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
-}
-
-.logo {
-    max-width: 60%; /* Ajusta según el tamaño del logo */
-    opacity: 0.9;
-}
-
-/* Sección derecha con el formulario */
-.right-section {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
     gap: 15px;
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #2d5a2d; /* Verde medio para el título */
+.logo {
+    max-width: 80px;
+    height: auto;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+}
+
+/* Menú principal */
+.menu-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.menu-options {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu-options a {
+    text-decoration: none;
+    color: #2d5a2d;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-options a:hover {
+    background-color: #2d5a2d;
+    color: white;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Sección central con información */
+.center-section {
+    flex: 2;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos para las secciones de publicidad */
+.left-section, .right-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.ad-space {
+    text-align: center;
+}
+
+.ad-space img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Beneficios */
+.benefits {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.benefit-items {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.benefit {
+    max-width: 250px;
+    text-align: center;
+}
+
+.benefit img {
+    width: 60px;
+    height: 60px;
+}
+
+.benefit h3 {
+    margin-top: 10px;
+    color: #2d5a2d;
+}
+
+/* Testimonios */
+.testimonials {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 20px;
+}
+
+.testimonial-items {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial {
+    max-width: 300px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Contenedor de Contacto */
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de Contacto */
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.contact-info h2 {
+    color: #2d5a2d;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+/* Formulario de Contacto */
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.contact-form h2 {
+    color: #2d5a2d;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    margin-bottom: 15px;
 }
 
 label {
-    color: #555; /* Texto gris oscuro para los labels */
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
 }
 
-input {
+input, textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
-input:focus {
-    border-color: #2d5a2d; /* Verde medio al enfocar */
-    outline: none;
+textarea {
+    resize: none;
 }
 
 button {
     padding: 10px;
-    background-color: #2d5a2d; /* Verde medio para el botón */
+    background-color: #2d5a2d;
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #1a2e1a; /* Verde oscuro para el hover del botón */
+    background-color: #1a2e1a;
 }
 
-p {
+/* Mapa */
+.map {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.map h2 {
+    color: #2d5a2d;
+    margin-bottom: 10px;
+}
+/* Contenedor general de los coches */
+.cars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Estilos de cada tarjeta */
+.car-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+}
+
+/* Imagen del coche */
+.car-image {
+    width: 40%;
+    object-fit: cover;
+}
+
+/* Información del coche */
+.car-info {
+    padding: 20px;
+    flex: 1;
+}
+
+.car-info h2 {
+    color: #2d5a2d;
+    margin-bottom: 10px;
+}
+
+.car-info p {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+/* Botones */
+.btn-reservar, .btn-contacto {
+    padding: 10px;
     margin-top: 10px;
-    font-size: 0.9em;
-    color: #555;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-p a {
-    color: #2d5a2d; /* Verde medio para los enlaces */
-    text-decoration: none;
+.btn-reservar {
+    background-color: #2d5a2d;
+    color: white;
 }
 
-p a:hover {
-    text-decoration: underline;
+.btn-reservar:hover {
+    background-color: #1a2e1a;
+}
+
+.btn-contacto {
+    background-color: #f0a500;
+    color: white;
+}
+
+.btn-contacto:hover {
+    background-color: #d48c00;
 }
