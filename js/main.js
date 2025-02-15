@@ -2,6 +2,7 @@ const API_BASE_URL = "http://localhost:8000/api/";
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
+const contactMessage =  document.getElementById("contactMessage");
 
 
 if (loginForm){
@@ -12,8 +13,6 @@ if (loginForm){
     
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-    
-        console.log("hola mundo");
     
         try{
     
@@ -26,10 +25,7 @@ if (loginForm){
             });
     
             const result= await response.json();
-    
-            console.log(" mundo");
-    
-    
+        
             if (response.ok){
     
                 // Si el servidor devuelve un token, lo guardamos
@@ -42,11 +38,7 @@ if (loginForm){
                 }
             }else{
                 alert(result.message || "Error al iniciar sesion");
-            }
-    
-            console.log("hola ");
-    
-    
+            }    
         } catch (error){
             console.error('Error:', error);
             alert('Ocurrió un error al conectar con el servidor');
@@ -90,6 +82,38 @@ if (registerForm){
         } catch (error) {
             console.error("Error de conexión:", error);
             alert("No se pudo conectar con el servidor. Inténtalo más tarde.");
+        }
+    });
+}
+
+if (contactMessage){
+
+    contactMessage.addEventListener('submit', async (event) =>{
+       
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        try{
+            const response = await fetch(API_BASE_URL + 'emailconfirmation.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:JSON.stringify({ nombre, email, mensaje})
+            });
+
+            const result = await response.json();
+
+            if (response.ok){
+                alert("Mensaje enviado correctamente");
+                contactMessage.reset();
+            }else{
+                alert("Error: " + result.message);
+            }
+        } catch(error){
+            alert("Error al enviar el mensaje: " + error.message);
+
         }
     });
 }
