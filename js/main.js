@@ -67,12 +67,13 @@ if (registerForm){
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
     
         try {
             const response = await fetch(API_BASE_URL + 'register.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, lastname, phone, email, password })
+                body: JSON.stringify({ name, lastname, phone, email, password, confirmPassword })
             });
     
             const result = await response.json();

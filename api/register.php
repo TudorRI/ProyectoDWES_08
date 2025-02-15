@@ -20,6 +20,9 @@ $email= $data['email'];
 $password= $data['password'];
 $confirmPassword= $data['confirmPassword'];
 
+error_log($password);
+error_log($confirmPassword);
+
 // Validación de datos
 if (empty($name) || empty($lastname) || empty($phone) || empty($email) || empty($password)) {
     echo json_encode(["error" => "Todos los campos son obligatorios"]);
@@ -50,7 +53,6 @@ if (!preg_match('/^[0-9]{9}$/', $phone)) {
 
 // Validar que ambas contraseñas sean iguales
 if ($password != $confirmPassword){
-
     http_response_code(400);
     echo json_encode(["error" => "Ambas contraseñas no coinciden. Por favor vuelva a intentarlo."]);
     exit;
