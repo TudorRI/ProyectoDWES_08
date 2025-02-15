@@ -5,14 +5,20 @@ require '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+use Dotenv\Loader\Loader;
+
+// Cargar variables de entorno
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 //Configuración de errores
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');
 
-$smtpMailUsername= $_ENV['SMPT_MAIL_USERNAME'];
-$smtpMailPassword= $_ENV['SMPT_MAIL_PASSWORD'];
+$smtpMailUsername= $_ENV['SMTP_MAIL_USERNAME'];
+$smtpMailPassword= $_ENV['SMTP_MAIL_PASSWORD'];
 
 $data= json_decode(file_get_contents("php://input"), true);
 

@@ -93,3 +93,15 @@ Stack trace:
 [15-Feb-2025 18:07:38 UTC] edu
 [15-Feb-2025 18:07:38 UTC] $2y$12$J7kDk5UnA2E9qCeGGtgF3OSzCE8Lr6rHnMZWI8o7P3lAOrRrS70Gy
 [15-Feb-2025 18:07:38 UTC] 1
+[15-Feb-2025 23:46:59 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_USERNAME" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 14
+[15-Feb-2025 23:46:59 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_PASSWORD" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 15
+[15-Feb-2025 23:46:59 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 601
+[15-Feb-2025 23:46:59 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 604
+[15-Feb-2025 23:48:09 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_USERNAME" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 20
+[15-Feb-2025 23:48:09 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_PASSWORD" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 21
+[15-Feb-2025 23:48:10 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 601
+[15-Feb-2025 23:48:10 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 604
+[15-Feb-2025 23:48:27 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_USERNAME" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 20
+[15-Feb-2025 23:48:27 UTC] PHP Warning:  Undefined array key "SMPT_MAIL_PASSWORD" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/emailconfirmation.php on line 21
+[15-Feb-2025 23:48:27 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 601
+[15-Feb-2025 23:48:27 UTC] PHP Deprecated:  base64_encode(): Passing null to parameter #1 ($string) of type string is deprecated in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/vendor/phpmailer/phpmailer/src/SMTP.php on line 604
