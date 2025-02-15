@@ -11,6 +11,9 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');
 
+$smtpMailUsername= $_ENV['SMPT_MAIL_USERNAME'];
+$smtpMailPassword= $_ENV['SMPT_MAIL_PASSWORD'];
+
 $data= json_decode(file_get_contents("php://input"), true);
 
 $nombre = $data['nombre'];
@@ -32,8 +35,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';  
     $mail->SMTPAuth = true;
-    $mail->Username = 'trentingsoporte@gmail.com';  // Correo remitente
-    $mail->Password = 'wvhn xgst wvhv vejr';  // Clave de aplicación (NO la contraseña normal)
+    $mail->Username = $smtpMailUsername;  
+    $mail->Password = $smtpMailPassword;  // Clave de aplicación (NO la contraseña normal)
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  
     $mail->Port = 587;  
 
