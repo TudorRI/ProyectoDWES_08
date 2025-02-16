@@ -10,17 +10,17 @@
     <div class="container">
         <!-- Seccion del logo-->
          <div class="left-section">
-            <img src="../styles/Logo_T.png" alt="Logo" class="logo">
+            <img src="/styles/Logo_T.png" alt="Logo" class="logo">
          </div>
          <!-- Seccion derecha para el formulario de registro -->
           <div class="right-section">
-            <form class="login-form">
+            <form id="loginForm" class="login-form" method="POST">
                 <h2>Inicio de Sesion</h2>
 
                 <!-- Input del correo electronico -->
                 <input type="text" id="email" name="email" required placeholder="Correo electrónico">
                 <!-- Input de la contraseña -->
-                <input type="text" id="password" name="password" required placeholder="Contraseña">
+                <input type="password" id="password" name="password" required placeholder="Contraseña">
 
                 <p>¿No tienes cuenta? <a href="register.html">Registrate aqui</a></p>
 
@@ -28,5 +28,6 @@
             </form>
           </div>
     </div>
+    <script src="../js/main.js" defer></script>
 </body>
 </html>

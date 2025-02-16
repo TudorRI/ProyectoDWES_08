@@ -9,6 +9,10 @@ use Firebase\JWT\JWT;
 require '../config/config.php';
 require '../vendor/autoload.php';
 
+//Configuración de errores
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/errors.log');
 
 // Obtener datos del frontend
 $data = json_decode(file_get_contents("php://input"),true);
@@ -17,19 +21,23 @@ $lastname= $data['lastname'];
 $phone= $data['phone'];
 $email= $data['email'];
 $password= $data['password'];
+$confirmPassword= $data['confirmPassword'];
 
-// Validacion de email unico
-$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-$stmt->execute([$email]);
-if ($stmt->rowCount() > 0) {
-    http_response_code(400);
-    echo json_encode(["error" => "El email ya está registrado."]);
-    exit;
-}
+error_log($password);
+error_log($confirmPassword);
 
 // Validación de datos
 if (empty($name) || empty($lastname) || empty($phone) || empty($email) || empty($password)) {
     echo json_encode(["error" => "Todos los campos son obligatorios"]);
+    exit;
+}
+
+// Validacion de email unico
+$stmt = $pdo->prepare("SELECT ID_USER FROM USER WHERE EMAIL = ?");
+$stmt->execute([$email]);
+if ($stmt->rowCount() > 0) {
+    http_response_code(400);
+    echo json_encode(["error" => "El email ya está registrado."]);
     exit;
 }
 
@@ -46,9 +54,17 @@ if (!preg_match('/^[0-9]{9}$/', $phone)) {
     exit;
 }
 
+// Validar que ambas contraseñas sean iguales
+if ($password != $confirmPassword){
+    http_response_code(400);
+    echo json_encode(["error" => "Ambas contraseñas no coinciden. Por favor vuelva a intentarlo."]);
+    exit;
+}
+
+// Encriptar la password
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-$sql= 'INSERT INTO users (NAME, LASTNAME, PHONE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?)';
+$sql= 'INSERT INTO USER (NAME, LASTNAME, PHONE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?)';
 $stmt= $pdo->prepare($sql);
 
 try {
@@ -56,7 +72,7 @@ try {
     $pdo->beginTransaction();
 
     // Ejecuta la consulta
-    $stmt->execute([$name, $lastname,$phone, $email, $hashed_password]);
+    $stmt->execute([$name, $lastname, $phone, $email, $hashed_password]);
 
     $user_id = $pdo->lastInsertId();
 

@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Dotenv\Loader\Loader;

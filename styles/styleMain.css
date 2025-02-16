@@ -323,3 +323,86 @@ button:hover {
 .btn-contacto:hover {
     background-color: #d48c00;
 }
+/* Estilo del menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #2d5a2d;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1em;
+}
+
+.dropdown-content a:hover {
+    background-color: #2d5a2d;
+    color: white;
+}
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    display: block;
+    margin: 5px 0;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a2e1a;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #2d5a2d;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;  /* Asegura que el logo y el menú estén separados */
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    max-width: 80px;
+    height: auto;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+}
