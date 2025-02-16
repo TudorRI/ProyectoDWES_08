@@ -4,6 +4,7 @@ const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const contactMessage =  document.getElementById("contactMessage");
 
+// Seccion Login
 
 if (loginForm){
 
@@ -47,6 +48,7 @@ if (loginForm){
     });
 }
 
+// Seccion Registro
 
 if (registerForm){
 
@@ -86,6 +88,7 @@ if (registerForm){
     });
 }
 
+// Seccion Contacto
 if (contactMessage){
 
     contactMessage.addEventListener('submit', async (event) =>{
@@ -117,5 +120,9 @@ if (contactMessage){
         }
     });
 }
+
+// Seccion Coches
+
+
 
 
