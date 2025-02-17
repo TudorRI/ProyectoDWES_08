@@ -8,14 +8,14 @@
 </head>
 <body>
     <div class="container">
-        <form class="right-section">
+        <form id="bookingDates" class="right-section" method="POST">
             <div class="login-form">
-                <input type="text" placeholder="Fecha de inicio"><br>
-                <input type="text" placeholder="Fecha de fin de reserva">
+                <input id="initialDate" type="date" placeholder="Fecha de inicio" required><br>
+                <input id="finalDate" type="date" placeholder="Fecha de fin de reserva" required>
             </div>
             <button type="submit">Reservar</button>
         </form>
     </div>
-    
+    <script src="../js/main.js"></script>
 </body>
 </html>

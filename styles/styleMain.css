@@ -277,6 +277,11 @@ button:hover {
     object-fit: cover;
 }
 
+/* Formulario del coche */
+.car-form{
+    display: contents;
+}
+
 /* Información del coche */
 .car-info {
     padding: 20px;

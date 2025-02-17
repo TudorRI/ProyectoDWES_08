@@ -71,10 +71,4 @@ if($user){
 }else{
     echo json_encode(["error" => "El correo ingresado no existe."]);
 }
-
-
-
-
-
-
 ?>

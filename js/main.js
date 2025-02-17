@@ -3,6 +3,9 @@ const API_BASE_URL = "http://localhost:8000/api/";
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const contactMessage =  document.getElementById("contactMessage");
+const carContainer = document.getElementById("car-list");
+const bookingDates = document.getElementById("bookingDates");
+
 
 // Seccion Login
 
@@ -121,7 +124,110 @@ if (contactMessage){
     });
 }
 
-// Seccion Coches
+// Sección Coches
+if (carContainer) {
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch(API_BASE_URL + "cars.php");
+            const cars = await response.json();
+
+            if (!response.ok) {
+                throw new Error("Error al obtener los coches");
+            }
+
+            carContainer.innerHTML = ""; // Limpiar el contenedor antes de agregar coches
+
+            cars.forEach(car => {
+                const carCard = document.createElement("div");
+                carCard.classList.add("car-card");
+
+                carCard.innerHTML = `
+                    <img src="${API_BASE_URL + car.IMAGE_URL}" alt="${car.MODEL}" class="car-image">
+                    <form class="car-form">
+                        <div class="car-info">
+                            <h2>${car.BRAND} ${car.MODEL}</h2>
+                            <p><strong>Marca:</strong> ${car.BRAND}</p>
+                            <p><strong>Modelo:</strong> ${car.MODEL}</p>
+                            <p><strong>Año de lanzamiento:</strong> ${car.RELEASE_YEAR}</p>
+                            <p><strong>Precio por día:</strong> ${car.DAY_PRICE}€</p>
+
+                            <input type="hidden" name="car_id" value="${car.ID_CAR}">
+                            <input type="hidden" name="car_brand" value="${car.BRAND}">
+                            <input type="hidden" name="car_model" value="${car.MODEL}">
+                            <input type="hidden" name="car_price" value="${car.DAY_PRICE}">
+
+                            <button type="submit" class="btn-reservar">Reservar</button>
+                            <button type="button" class="btn-contacto">Contactar</button>
+                        </div>
+                    </form>
+                `;
+
+                carContainer.appendChild(carCard);
+            });
+
+            // Capturar el envío del formulario de cada coche
+            document.querySelectorAll(".car-form").forEach(form => {
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault(); // Evita la recarga de la página
+
+                    const formData = new FormData(form);
+                    const carData = {
+                        id: formData.get("car_id"),
+                        brand: formData.get("car_brand"),
+                        model: formData.get("car_model"),
+                        price: formData.get("car_price"),
+                    };
+
+                    // Guardamos los datos en sessionStorage
+                    sessionStorage.setItem("selectedCar", JSON.stringify(carData));
+
+                    // Redirigir a la página de selección de fechas
+                    window.location.href = "../public/calendar.html";
+                });
+            });
+        } catch (error) {
+            console.error("Error:", error);
+            carContainer.innerHTML = "<p>Error al cargar los coches.</p>";
+        }
+    });
+}
+
+// Seccion de fechas para el coche seleccionado
+
+if(bookingDates){
+
+    bookingDates.addEventListener('submit',  async(event) =>{
+
+        const selectedCar =  JSON.parse(sessionStorage.getItem("selectedCar"));
+
+        const id_car = selectedCar['id'];
+        const initialDate = document.getElementById("initialDate").value;
+        const finalDate = document.getElementById("finalDate").value;
+
+        event.preventDefault();
+
+        try{
+            const response = await fetch(API_BASE_URL + 'availablecar.php',{
+                method:'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body:JSON.stringify({ id_car, initialDate, finalDate })
+            })
+
+            const result = await response.json();
+            if(response.ok){
+                alert("Fechas seleccionadas con exito");
+                window.location.href= "../public/bookingdetails.html";
+            }else{
+                alert("Error: " + result.message);
+            }
+        }catch(error){
+            alert("Error al seleccionar las fechas: " + error.message);
+        }
+    });
+}
+
+// Seccion de detalles de la reserva
+
 
 
 
