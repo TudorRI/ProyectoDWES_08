@@ -9,7 +9,7 @@ ini_set('error_log', __DIR__ . '/errors.log');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$id_car = $data['id_car'];
+$id_car= $data['id_car'];
 $initialDate = $data['initialDate'];
 $finalDate = $data['finalDate'];
 

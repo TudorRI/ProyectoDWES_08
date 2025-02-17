@@ -109,3 +109,6 @@ Stack trace:
 [16-Feb-2025 22:15:59 UTC] edu
 [16-Feb-2025 22:15:59 UTC] $2y$12$J7kDk5UnA2E9qCeGGtgF3OSzCE8Lr6rHnMZWI8o7P3lAOrRrS70Gy
 [16-Feb-2025 22:15:59 UTC] 1
+[17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 14
+[17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 17
+[17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 18
