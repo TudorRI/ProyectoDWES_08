@@ -28,7 +28,6 @@ $booking= $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Si el array contiene informacion significa que si hay una reserva en esas fechas, si esta vacio es que esta disponible
 if ($booking){
-
     echo json_encode(["error" => "El coche no esta disponible durante estas fechas. Por favor introduzca otras fechas"]);
     exit;
 }else{

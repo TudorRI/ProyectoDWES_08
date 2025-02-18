@@ -112,3 +112,6 @@ Stack trace:
 [17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 14
 [17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 17
 [17-Feb-2025 16:52:58 UTC] PHP Warning:  Trying to access array offset on null in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/availablecar.php on line 18
+[18-Feb-2025 09:55:10 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
+[18-Feb-2025 14:31:30 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
+[18-Feb-2025 14:32:40 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
