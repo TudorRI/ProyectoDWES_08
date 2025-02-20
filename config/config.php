@@ -7,6 +7,9 @@ use Dotenv\Loader\Loader;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+require 'vendor/autoload.php'; // Carga el autoload de Composer
+\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+
 // Cargar variables de entorno
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -30,5 +33,3 @@ try {
 
 // Configuracion de JWT
 $jwtSecret = $_ENV['JWT_SECRET'];
-
-?>
