@@ -301,4 +301,3 @@ if (detailsContainer){
 }
 
 
-

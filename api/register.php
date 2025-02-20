@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -15,13 +15,13 @@ ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');
 
 // Obtener datos del frontend
-$data = json_decode(file_get_contents("php://input"),true);
-$name= $data['name'];
-$lastname= $data['lastname'];
-$phone= $data['phone'];
-$email= $data['email'];
-$password= $data['password'];
-$confirmPassword= $data['confirmPassword'];
+$data = json_decode(file_get_contents("php://input"), true);
+$name = $data['name'];
+$lastname = $data['lastname'];
+$phone = $data['phone'];
+$email = $data['email'];
+$password = $data['password'];
+$confirmPassword = $data['confirmPassword'];
 
 error_log($password);
 error_log($confirmPassword);
@@ -55,7 +55,7 @@ if (!preg_match('/^[0-9]{9}$/', $phone)) {
 }
 
 // Validar que ambas contraseñas sean iguales
-if ($password != $confirmPassword){
+if ($password != $confirmPassword) {
     http_response_code(400);
     echo json_encode(["error" => "Ambas contraseñas no coinciden. Por favor vuelva a intentarlo."]);
     exit;
@@ -64,8 +64,8 @@ if ($password != $confirmPassword){
 // Encriptar la password
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-$sql= 'INSERT INTO USER (NAME, LASTNAME, PHONE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?)';
-$stmt= $pdo->prepare($sql);
+$sql = 'INSERT INTO USER (NAME, LASTNAME, PHONE, EMAIL, PASSWORD) VALUES (?, ?, ?, ?, ?)';
+$stmt = $pdo->prepare($sql);
 
 try {
     // Inicia la transacción
@@ -76,7 +76,7 @@ try {
 
     $user_id = $pdo->lastInsertId();
 
-    $payload= [
+    $payload = [
         "user_id" => $user_id,
         "email" => $email,
         "exp" => time() + 3600 // Expira en 1 hora
@@ -90,12 +90,9 @@ try {
         "message" => "Usuario registrado exitosamente",
         "token" => $token
     ]);
-
 } catch (Exception $e) {
     // Revierte la transacción si hay un error
     $pdo->rollBack();
     http_response_code(500);
     echo json_encode(["error" => "Error al registrar el usuario: " . $e->getMessage()]);
 }
-?>
-
