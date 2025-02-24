@@ -47,3 +47,10 @@ CREATE USER tudoredu IDENTIFIED BY "tudoredu";
 
 GRANT ALL PRIVILEGES ON ProyectoDWES_08.* TO tudoredu;
 
+-- Insert de coches 
+INSERT INTO CAR (ID_CAR, BRAND, MODEL, RELEASE_YEAR, DAY_PRICE, AVAILABLE) VALUES
+('CAR001', 'Seat', 'Ibiza', 2021, 30.00, TRUE),
+('CAR002', 'BMW', 'Serie 3', 2018, 55.00, TRUE),
+('CAR003', 'Audi', 'A4', 2018, 45.00, TRUE),
+('CAR004', 'Mercedes', 'Clase C', 2017, 50.00, TRUE),
+('CAR005', 'Ford', 'Raptor', 2024, 100.00, TRUE);
