@@ -30,5 +30,3 @@ try {
 
 // Configuracion de JWT
 $jwtSecret = $_ENV['JWT_SECRET'];
-
-?>

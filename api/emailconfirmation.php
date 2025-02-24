@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require '../config/config.php';
 require '../vendor/autoload.php';
@@ -17,10 +17,10 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');
 
-$smtpMailUsername= $_ENV['SMTP_MAIL_USERNAME'];
-$smtpMailPassword= $_ENV['SMTP_MAIL_PASSWORD'];
+$smtpMailUsername = $_ENV['SMTP_MAIL_USERNAME'];
+$smtpMailPassword = $_ENV['SMTP_MAIL_PASSWORD'];
 
-$data= json_decode(file_get_contents("php://input"), true);
+$data = json_decode(file_get_contents("php://input"), true);
 
 $nombre = $data['nombre'];
 $email = $data['email'];
@@ -39,15 +39,15 @@ $mail = new PHPMailer(true);
 try {
     // Configuración del servidor SMTP
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';  
+    $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $smtpMailUsername;  
+    $mail->Username = $smtpMailUsername;
     $mail->Password = $smtpMailPassword;  // Clave de aplicación (NO la contraseña normal)
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  
-    $mail->Port = 587;  
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
     // Remitente y destinatario
-    $mail->setFrom('trentingsoporte@gmail.com', 'T-Renting Soporte');  
+    $mail->setFrom('trentingsoporte@gmail.com', 'T-Renting Soporte');
     $mail->addAddress($email, $nombre); // Envía el correo al usuario que escribió en el formulario
 
     // Contenido del correo
@@ -69,4 +69,3 @@ try {
     echo json_encode(["error" => "Error al enviar el mensaje: " . $mail->ErrorInfo]);
     http_response_code(500);
 }
-?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require '../config/config.php';
 require '../vendor/autoload.php';
@@ -14,8 +14,8 @@ use Firebase\JWT\JWT;
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$email= $data['email'];
-$password= $data['password'];
+$email = $data['email'];
+$password = $data['password'];
 
 error_log($email);
 error_log($password);
@@ -41,21 +41,21 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 error_log($user['PASSWORD']);
 error_log($user['ID_USER']);
 
-if($user){
+if ($user) {
 
-    if(password_verify($password, $user['PASSWORD'])){
+    if (password_verify($password, $user['PASSWORD'])) {
 
         // Si las credenciales son correctas, generamos el token JWT
-        
+
         $jwtSecret = $_ENV['JWT_SECRET'];
 
-        $payload= [
-            
+        $payload = [
+
             "user_id" => $user['ID_USER'],
             "email" => $email,
             "exp" => time() + 3600
         ];
-        
+
         $token = JWT::encode($payload, $jwtSecret, 'HS256');
 
 
@@ -63,12 +63,11 @@ if($user){
             "message" => "Inicio de sesion exitoso",
             "token" => $token
         ]);
-    }else{
+    } else {
         echo json_encode([
             "error" => "Contraseña incorrecta. Por favor intentelo de nuevo."
         ]);
     }
-}else{
+} else {
     echo json_encode(["error" => "El correo ingresado no existe."]);
 }
-?>

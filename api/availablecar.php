@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../config/config.php';
 require '../vendor/autoload.php';
 
@@ -9,7 +9,7 @@ ini_set('error_log', __DIR__ . '/errors.log');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$id_car= $data['id_car'];
+$id_car = $data['id_car'];
 $initialDate = $data['initialDate'];
 $finalDate = $data['finalDate'];
 
@@ -24,13 +24,12 @@ if (empty($initialDate) || empty($finalDate || empty($id_car))) {
 $sql = "SELECT * FROM BOOKING WHERE ID_CAR = ? AND DATE_START<= ? AND DATE_FINISH >= ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id_car, $initialDate, $finalDate]);
-$booking= $stmt->fetch(PDO::FETCH_ASSOC);
+$booking = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Si el array contiene informacion significa que si hay una reserva en esas fechas, si esta vacio es que esta disponible
-if ($booking){
+if ($booking) {
     echo json_encode(["error" => "El coche no esta disponible durante estas fechas. Por favor introduzca otras fechas"]);
     exit;
-}else{
+} else {
     echo json_encode(["message" => "Fechas seleccionadas con exito."]);
 }
-?>

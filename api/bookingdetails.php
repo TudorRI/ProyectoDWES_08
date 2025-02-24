@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require '../config/config.php';
 require '../vendor/autoload.php';
@@ -15,7 +15,8 @@ $initialDate = $data['initialDate'];
 $finalDate = $data['finalDate'];
 
 // Funcion para calcular la cantidad de dias totales de la reserva
-function amountOfDays($initialDate, $finalDate){
+function amountOfDays($initialDate, $finalDate)
+{
 
     $initial = new DateTime($initialDate);
     $final = new DateTime($finalDate);
@@ -27,14 +28,13 @@ function amountOfDays($initialDate, $finalDate){
 
 $days = amountOfDays($initialDate, $finalDate);
 
-$total= $days*$day_price;
+$total = $days * $day_price;
 
-if(isset($days) && isset($total)){
+if (isset($days) && isset($total)) {
     echo json_encode([
         "days" => $days,
         "total" => $total
     ]);
-}else{
+} else {
     echo json_encode(["error" => "Ha habido un error al obtener el total de dias o la cantidad total de la reserva"]);
 }
-?>
