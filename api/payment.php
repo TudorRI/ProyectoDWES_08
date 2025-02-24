@@ -1,5 +1,7 @@
 <?php
 require '../config/config.php'; // Carga la configuración de Stripe
+require '../vendor/autoload.php';
+
 
 header('Content-Type: application/json');
 
