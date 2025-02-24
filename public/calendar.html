@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar T-Renting</title>
+    <link rel="stylesheet" href="../styles/styleMain.css">
+</head>
+<body>
+    <div id="bookingContainer" class="container">
+        <div class="right-section">
+            <form id="bookingDates" class="calendar-form" method="POST">
+                <h2>Seleccione fechas</h2>
+                <div class="login-form">
+                    <label for="">Fecha de inicio</label><br>
+                    <input id="initialDate" type="date" placeholder="Fecha de inicio" required><br>
+                    <label for="">Fecha de fin de reserva</label><br>
+                    <input id="finalDate" type="date" placeholder="Fecha de fin de reserva" required>
+                </div>
+                <button type="submit">Reservar</button>
+    
+                <button class="cancelbtn" type="menu">Cancelar</button>
+            </form>
+
+        </div>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+</html>

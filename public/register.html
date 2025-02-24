@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro T-Renting</title>
+    <link rel="stylesheet" href="../styles/styleLogin-Register.css"> <!-- Enlaza tu archivo CSS -->
+</head>
+<body>
+    <div class="container">
+        <!-- Sección izquierda con el logo -->
+        <div class="left-section">
+            <img src="../styles/Logo_T.png" alt="Logo de T-Renting" class="logo">
+        </div>
+
+        <!-- Sección derecha con el formulario de registro -->
+        <div class="right-section">
+            <h2>Registro de Usuarios</h2>
+            <form id="registerForm" class="login-form" method="POST">
+                <!-- Campo: Nombre -->
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Nombre" required>
+                </div>
+
+                <!-- Campo: Apellidos -->
+                <div class="form-group">
+                    <input type="text" id="lastname" name="lastname" placeholder="Apellidos" required>
+                </div>
+
+                <!-- Campo: Teléfono -->
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" placeholder="Ingrese su número" required>
+                </div>
+
+                <!-- Campo: Correo Electrónico -->
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Correo@ejemplo.com" required>
+                </div>
+
+                <!-- Campo: Contraseña -->
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="(Minimo 8 caracteres)" required>
+                </div>
+
+                <!-- Campo: Confirmar Contraseña -->
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
+                </div>
+
+                <!-- Botón de Registro -->
+                <div class="form-group">
+                    <button type="submit">Registrarse</button>
+                </div>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+</html>
