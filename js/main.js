@@ -9,6 +9,7 @@ const detailsContainer = document.getElementById("detailsContainer");
 const bookingContainer = document.getElementById("bookingContainer");
 const informationContainer =  document.getElementById("informationContainer")
 const informationForm = document.getElementById("informationForm");
+const logoutButton = document.getElementById("logoutButton");
 
 
 // Seccion Login
@@ -93,6 +94,18 @@ if (registerForm){
             alert("No se pudo conectar con el servidor. Inténtalo más tarde.");
         }
     });
+}
+
+// Seccion de cerrar sesion
+
+if(logoutButton){
+
+    logoutButton.addEventListener("onclick", () => {  // Usar "click" en lugar de "onclick"
+
+        localStorage.removeItem("jwtToken")
+        window.location.href= "../public/login.html"
+
+    })
 }
 
 // Seccion Contacto
