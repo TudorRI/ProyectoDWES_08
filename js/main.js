@@ -282,7 +282,7 @@ if (detailsContainer){
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
                         <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
-                        <button id="fillInformation">Rellenar información personal</button>
+                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>
                     </div>
                 `
             }else{
@@ -293,11 +293,6 @@ if (detailsContainer){
         }
     });
 
-    document.getElementById("fillInformation").addEventListener("click", function() {
-
-        window.location.href = "../public/bookingInformation.html";
-
-    });
 }
 
 

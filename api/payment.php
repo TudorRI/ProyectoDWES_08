@@ -1,34 +1,26 @@
 <?php
-require '../config/config.php'; // Carga la configuración de Stripe
+require '../config/config.php';
+require 'vendor/autoload.php'; // Cargar Stripe con Composer
 
-header('Content-Type: application/json');
+\Stripe\Stripe::setApiKey("TU_CLAVE_SECRETA"); // Reemplaza con tu clave secreta
 
 try {
-    // Obtén los datos del pago desde el frontend (precio, descripción, etc.)
-    $json = file_get_contents('php://input');
-    $data = json_decode($json);
-
-    // Crea una sesión de pago con Stripe Checkout
-    $session = \Stripe\Checkout\Session::create([
+    $checkout_session = \Stripe\Checkout\Session::create([
         'payment_method_types' => ['card'],
         'line_items' => [[
             'price_data' => [
-                'currency' => 'eur', // Cambia a tu moneda
-                'product_data' => [
-                    'name' => 'Alquiler de coche',
-                ],
-                'unit_amount' => $data->amount * 100, // Stripe usa centavos
+                'currency' => 'usd',
+                'product_data' => ['name' => 'Producto de prueba'],
+                'unit_amount' => 1000, // Monto en centavos (10.00 USD)
             ],
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => 'https://tudominio.com/exito', // URL de éxito
-        'cancel_url' => 'https://tudominio.com/cancelado', // URL de cancelación
+        'success_url' => "https://tusitio.com/success.php",
+        'cancel_url' => "https://tusitio.com/cancel.php",
     ]);
 
-    // Devuelve el ID de la sesión al frontend
-    echo json_encode(['sessionId' => $session->id]);
-} catch (\Stripe\Exception\ApiErrorException $e) {
-    http_response_code(500);
+    echo json_encode(['id' => $checkout_session->id]);
+} catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
