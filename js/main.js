@@ -10,6 +10,9 @@ const bookingContainer = document.getElementById("bookingContainer");
 const informationContainer =  document.getElementById("informationContainer")
 const informationForm = document.getElementById("informationForm");
 const logoutButton = document.getElementById("logoutButton");
+const myAccountButton = document.getElementById("myAccountButton");
+const myBookingsButton = document.getElementById("myBookingsButton");
+
 
 
 // Seccion Login
@@ -100,12 +103,25 @@ if (registerForm){
 
 if(logoutButton){
 
-    logoutButton.addEventListener("onclick", () => {  // Usar "click" en lugar de "onclick"
+    logoutButton.addEventListener("click", () => {  // Usar "click" en lugar de "onclick"
 
         localStorage.removeItem("jwtToken")
+        sessionStorage.clear()
         window.location.href= "../public/login.html"
 
     })
+}
+
+// Seccion Mi Perfil
+if(myAccountButton){
+
+}
+
+
+// Seccion Mis Reservas
+if(myBookingsButton){
+
+
 }
 
 // Seccion Contacto
@@ -295,7 +311,9 @@ if (detailsContainer){
                         <label for="release_year"><strong>Año:</strong> ${selectedCar.release_year || "N/A"}</label><br>
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
-                        <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>                    </div>
+                        <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
+                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>                    
+                    </div>
                 `
             }else{
                 alert("Error: " + result.message);
@@ -383,4 +401,3 @@ if (informationContainer){
         }
     });
 }
-

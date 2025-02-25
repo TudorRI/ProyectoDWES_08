@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="header-content">
+            <img src="../styles/Logo_T.png" alt="Logo de la empresa" class="logo">
+            <h1>T-Renting</h1>
+        </div>
+
+        <!-- Menú desplegable con icono de 3 rayas -->
+        <div class="dropdown">
+            <button class="dropbtn">
+                <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+            </button>
+            <div class="dropdown-content">
+                <a id="myAccountButton" href="myaccount.html">Mi Perfil</a>
+                <a id="myBookingsButton" href="mybookings.html">Mis Reservas</a>
+                <a id="logoutButton" href="#">Cerrar sesion</a>
+            </div>
+        </div>
+    </header>
+
+    
     <div id="bookingContainer" class="container">
         <div class="right-section">
             <form id="bookingDates" class="calendar-form" method="POST">
