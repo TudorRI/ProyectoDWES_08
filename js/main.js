@@ -305,12 +305,12 @@ if (informationContainer){
             informationForm.addEventListener("submit", async (event) => {
                 event.preventDefault();
     
-                const infoName = document.getElementById("infoName").value;
-                const infoLastName = document.getElementById("infoLastName").value;
-                const infoEmail = document.getElementById("infoEmail").value;
-                const infoPhone = document.getElementById("infoPhone").value;
-                const checkbox = document.getElementById("infoCheckUser");
-                const infoCheckUser = checkbox.checked;
+                let infoName = document.getElementById("infoName").value;
+                let infoLastName = document.getElementById("infoLastName").value;
+                let infoEmail = document.getElementById("infoEmail").value;
+                let infoPhone = document.getElementById("infoPhone").value;
+                let checkbox = document.getElementById("infoCheckUser");
+                let infoCheckUser = checkbox.checked;
     
                 // Obtener el token JWT de localStorage
                 const token = localStorage.getItem("jwtToken");
