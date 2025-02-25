@@ -115,3 +115,29 @@ Stack trace:
 [18-Feb-2025 09:55:10 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
 [18-Feb-2025 14:31:30 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
 [18-Feb-2025 14:32:40 UTC] PHP Warning:  Undefined array key "day_price" in /Users/edupinorodriguez/Desktop/php_projects/ProyectoDWES_08/api/bookingdetails.php on line 13
+[24-Feb-2025 16:58:50 Europe/Berlin] tudor
+[24-Feb-2025 16:58:50 Europe/Berlin] tudor
+[24-Feb-2025 16:59:31 Europe/Berlin] tudor@gmail.com
+[24-Feb-2025 16:59:31 Europe/Berlin] tudor
+[24-Feb-2025 16:59:31 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[24-Feb-2025 16:59:31 Europe/Berlin] 1
+[24-Feb-2025 17:04:14 Europe/Berlin] tudor@gmail.com
+[24-Feb-2025 17:04:14 Europe/Berlin] tudor
+[24-Feb-2025 17:04:14 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[24-Feb-2025 17:04:14 Europe/Berlin] 1
+[24-Feb-2025 17:09:54 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\Users\tudor\OneDrive\Escritorio\ProyectoDWES_08\api\login.php on line 17
+[24-Feb-2025 17:09:54 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\Users\tudor\OneDrive\Escritorio\ProyectoDWES_08\api\login.php on line 18
+[24-Feb-2025 17:09:54 Europe/Berlin] 
+[24-Feb-2025 17:09:54 Europe/Berlin] 
+[24-Feb-2025 17:10:12 Europe/Berlin] tudor@gmail.com
+[24-Feb-2025 17:10:12 Europe/Berlin] tudor
+[24-Feb-2025 17:10:12 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[24-Feb-2025 17:10:12 Europe/Berlin] 1
+[24-Feb-2025 17:24:19 Europe/Berlin] tudor@gmail.com
+[24-Feb-2025 17:24:19 Europe/Berlin] tudor
+[24-Feb-2025 17:24:19 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[24-Feb-2025 17:24:19 Europe/Berlin] 1
+[24-Feb-2025 18:09:34 Europe/Berlin] tudor@gmail.com
+[24-Feb-2025 18:09:34 Europe/Berlin] tudor
+[24-Feb-2025 18:09:34 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[24-Feb-2025 18:09:34 Europe/Berlin] 1

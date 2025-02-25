@@ -255,20 +255,23 @@ button:hover {
 .cars-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px; /* Aumenta el espacio entre cada tarjeta */
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
 }
 
+
 /* Estilos de cada tarjeta */
 .car-card {
+    margin: auto;
     display: flex;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px; /* Espacio extra entre tarjetas */
 }
 
 .car-card:hover {
@@ -277,7 +280,7 @@ button:hover {
 
 /* Imagen del coche */
 .car-image {
-    width: 40%;
+    width: 50%; /* Reduce el tamaño de la imagen del coche */
     object-fit: cover;
 }
 
@@ -288,6 +291,7 @@ button:hover {
 
 /* Información del coche */
 .car-info {
+    margin: auto;
     padding: 20px;
     flex: 1;
 }
@@ -437,3 +441,5 @@ header h1 {
     flex-direction: column;
     gap: 15px;
 }
+
+.userInfo
