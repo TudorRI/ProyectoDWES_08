@@ -282,9 +282,7 @@ if (detailsContainer){
                         <label for="release_year"><strong>Año:</strong> ${selectedCar.release_year || "N/A"}</label><br>
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
-                        <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
-                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>
-                    </div>
+                        <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>                    </div>
                 `
             }else{
                 alert("Error: " + result.message);

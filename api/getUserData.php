@@ -30,7 +30,7 @@ list(, $token) = explode(' ', $authHeader); // Quitar 'Bearer' y obtener solo el
 $secretKey = $_ENV['JWT_SECRET']; // Usa la misma clave secreta con la que generaste el JWT
 
 try {
-    $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+    $decoded = JWT::decode($token, new Key($secretKey, 'HS256')); // Desencriptamos el token para obtener los datos
     $user_id= $decoded->user_id; // Extraemos el ID del user
     
     $stmt = $pdo->prepare("SELECT NAME, LASTNAME, EMAIL, PHONE FROM USER WHERE ID_USER = ?");
@@ -38,6 +38,7 @@ try {
     $user= $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user){
+        // Si existe el usuario recogemos los datos de la consulta y los mandamos al JS con JSON
         echo json_encode([
             "name" => $user['NAME'],
             "lastname" => $user['LASTNAME'],
