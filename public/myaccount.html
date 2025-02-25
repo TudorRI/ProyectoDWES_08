@@ -7,9 +7,63 @@
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
-    <label for="">Nombre</label>
-    <label for="">Apellido</label>
-    <label for="">Telefono</label>
-    <label for="">Correo</label>
+    <!-- Encabezado con el logo y el nombre de la empresa -->
+    <header>
+        <div class="header-content">
+            <img src="../styles/Logo_T.png" alt="Logo de la empresa" class="logo">
+            <h1>T-Renting</h1>
+        </div>
+
+        <!-- Menú desplegable con icono de 3 rayas -->
+        <div class="dropdown">
+            <button class="dropbtn">
+                <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+            </button>
+            <div class="dropdown-content">
+                <a href="myaccount.html">Mi Perfil</a>
+                <a href="mybookings.html">Mis Reservas</a>
+                <a href="">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú principal -->
+    <nav class="menu-container">
+        <ul class="menu-options">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="booking.html">Reservas</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="">
+            <label id="nombre">Nombre: Cargando...</label><br>
+            <label id="apellido">Apellido: Cargando...</label><br>
+            <label id="telefono">Teléfono: Cargando...</label><br>
+            <label id="correo">Correo: Cargando...</label><br>
+        </div>
+    </div>
+
+    <script>
+        // Consumir la API con fetch
+        fetch("userinfo.php")
+            .then(response => response.json()) // Convertir la respuesta a JSON
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("name").innerText = "Nombre: " + data.error;
+                    document.getElementById("lastname").innerText = "";
+                    document.getElementById("phone").innerText = "";
+                    document.getElementById("email").innerText = "";
+                } else {
+                    document.getElementById("name").innerText = "Nombre: " + data.nombre;
+                    document.getElementById("lastname").innerText = "Apellido: " + data.apellido;
+                    document.getElementById("phone").innerText = "Teléfono: " + data.telefono;
+                    document.getElementById("email").innerText = "Correo: " + data.correo;
+                }
+            })
+            .catch(error => console.error("Error al obtener datos:", error));
+    </script>
+
 </body>
 </html>
