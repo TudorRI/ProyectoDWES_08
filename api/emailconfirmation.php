@@ -7,15 +7,22 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Dotenv\Dotenv;
 use Dotenv\Loader\Loader;
+use Firebase\JWT\JWT;
+
+//Configuración de errores EN DESARROLLO
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+//Configuración de errores EN PRODUCCION
+/*ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/errors.log');*/
 
 // Cargar variables de entorno
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
-//Configuración de errores
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/errors.log');
 
 $smtpMailUsername = $_ENV['SMTP_MAIL_USERNAME'];
 $smtpMailPassword = $_ENV['SMTP_MAIL_PASSWORD'];
