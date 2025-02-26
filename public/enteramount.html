@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi cuenta T-Renting</title>
+    <title>T-Renting</title>
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
@@ -38,35 +38,17 @@
             <li><a href="contact.html">Contacto</a></li>
         </ul>
     </nav>
-    
+
     <div class="container">
-        <div class="">
-            <label id="nombre">Nombre: Cargando...</label><br>
-            <label id="apellido">Apellido: Cargando...</label><br>
-            <label id="telefono">Teléfono: Cargando...</label><br>
-            <label id="correo">Correo: Cargando...</label><br>
+        <div class="left-section">
+            <div class="login-form">
+                <input type="text" placeholder="Numero de tarjeta">
+                <input type="text" placeholder="Nombre del Titular">
+                <input type="month" placeholder="Fecha de caducidad">
+                <input type="text" placeholder="CCV">
+                <button type="submit">Realizar pago</button>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Consumir la API con fetch
-        fetch("userinfo.php")
-            .then(response => response.json()) // Convertir la respuesta a JSON
-            .then(data => {
-                if (data.error) {
-                    document.getElementById("name").innerText = "Nombre: " + data.error;
-                    document.getElementById("lastname").innerText = "";
-                    document.getElementById("phone").innerText = "";
-                    document.getElementById("email").innerText = "";
-                } else {
-                    document.getElementById("name").innerText = "Nombre: " + data.nombre;
-                    document.getElementById("lastname").innerText = "Apellido: " + data.apellido;
-                    document.getElementById("phone").innerText = "Teléfono: " + data.telefono;
-                    document.getElementById("email").innerText = "Correo: " + data.correo;
-                }
-            })
-            .catch(error => console.error("Error al obtener datos:", error));
-    </script>
-
 </body>
 </html>
