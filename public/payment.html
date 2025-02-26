@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pago con Stripe</title>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
         <!-- Encabezado con el logo y el nombre de la empresa -->
@@ -27,6 +28,42 @@
         </header>
     <!-- <script src="https://js.stripe.com/v3/"></script> -->
 
-    
+    <!-- Menú desplegable con icono de 3 rayas -->
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+        </button>
+        <div class="dropdown-content">
+            <a href="myaccount.html">Mi Perfil</a>
+            <a href="mybookings.html">Mis Reservas</a>
+            <a href="enteramount.html">Añadir fondos</a>
+            <a href="logout.php">Logout</a>
+        </div>
+    </div>
+</header>
+
+<!-- Menú principal -->
+<nav class="menu-container">
+    <ul class="menu-options">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="booking.html">Reservas</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+    </ul>
+</nav>
+    <button id="checkout-button">Pagar con Stripe</button>
+
+    <script>
+        const stripe = Stripe("TU_CLAVE_PUBLICA"); // Reemplaza con tu clave pública
+
+        document.getElementById("checkout-button").addEventListener("click", async () => {
+            const response = await fetch("checkout.php", { method: "POST" });
+            const session = await response.json();
+            const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+            if (result.error) {
+                alert(result.error.message);
+            }
+        });
+    </script>
 </body>
 </html>

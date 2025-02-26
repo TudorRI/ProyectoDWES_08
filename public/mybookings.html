@@ -7,11 +7,25 @@
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
-        <!-- Encabezado con el logo y el nombre de la empresa -->
-        <header>
-            <div class="header-content">
+    <!-- Encabezado con el logo y el nombre de la empresa -->
+    <header>
+        <div class="header-content">
+            <a href="../public/index.html">
                 <img src="../styles/Logo_T.png" alt="Logo de la empresa" class="logo">
-                <h1>T-Renting</h1>
+            </a>
+            <h1>T-Renting</h1>
+        </div>
+
+        <!-- Menú desplegable con icono de 3 rayas -->
+        <div class="dropdown">
+            <button class="dropbtn">
+                <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+            </button>
+            <div class="dropdown-content">
+                <a href="myaccount.html">Mi Perfil</a>
+                <a href="mybookings.html">Mis Reservas</a>
+                <a href="enteramount.html">Añadir fondos</a>
+                <a href="logout.php">Logout</a>
             </div>
     
             <!-- Menú desplegable con icono de 3 rayas -->
