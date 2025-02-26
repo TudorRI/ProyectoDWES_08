@@ -153,3 +153,11 @@ Stack trace:
 [25-Feb-2025 18:53:49 Europe/Berlin] tudor
 [25-Feb-2025 18:53:49 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
 [25-Feb-2025 18:53:49 Europe/Berlin] 1
+[26-Feb-2025 19:42:19 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\Users\tudor\OneDrive\Escritorio\ProyectoDWES_08\api\login.php on line 17
+[26-Feb-2025 19:42:19 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\Users\tudor\OneDrive\Escritorio\ProyectoDWES_08\api\login.php on line 18
+[26-Feb-2025 19:42:19 Europe/Berlin] 
+[26-Feb-2025 19:42:19 Europe/Berlin] 
+[26-Feb-2025 19:42:32 Europe/Berlin] tudor@gmail.com
+[26-Feb-2025 19:42:32 Europe/Berlin] tudor
+[26-Feb-2025 19:42:32 Europe/Berlin] $2y$10$EJTrkWqN/FbgseKlQJ593usr2Wm7BSVu/n4aUGXqH.kKzVz6HuMv6
+[26-Feb-2025 19:42:32 Europe/Berlin] 1

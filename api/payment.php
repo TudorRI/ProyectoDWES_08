@@ -16,7 +16,7 @@ try {
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => "https://tusitio.com/success.php",
+        'success_url' => "../public/succes.html",
         'cancel_url' => "https://tusitio.com/cancel.php",
     ]);
 
