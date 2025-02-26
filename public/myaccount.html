@@ -36,34 +36,9 @@
         </ul>
     </nav>
     
-    <div class="container">
-        <div class="">
-            <label id="nombre">Nombre: Cargando...</label><br>
-            <label id="apellido">Apellido: Cargando...</label><br>
-            <label id="telefono">Teléfono: Cargando...</label><br>
-            <label id="correo">Correo: Cargando...</label><br>
-        </div>
+    <div id="userDataContainer" class="container">
+        <!-- Los datos del usuario se generan dinamicamente con JS-->
     </div>
-
-    <script>
-        // Consumir la API con fetch
-        fetch("userinfo.php")
-            .then(response => response.json()) // Convertir la respuesta a JSON
-            .then(data => {
-                if (data.error) {
-                    document.getElementById("name").innerText = "Nombre: " + data.error;
-                    document.getElementById("lastname").innerText = "";
-                    document.getElementById("phone").innerText = "";
-                    document.getElementById("email").innerText = "";
-                } else {
-                    document.getElementById("name").innerText = "Nombre: " + data.nombre;
-                    document.getElementById("lastname").innerText = "Apellido: " + data.apellido;
-                    document.getElementById("phone").innerText = "Teléfono: " + data.telefono;
-                    document.getElementById("email").innerText = "Correo: " + data.correo;
-                }
-            })
-            .catch(error => console.error("Error al obtener datos:", error));
-    </script>
-
+    <script src="../js/main.js"></script>
 </body>
 </html>

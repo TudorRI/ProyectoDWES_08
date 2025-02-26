@@ -115,7 +115,50 @@ if(logoutButton){
 // Seccion Mi Perfil
 if(myAccountButton){
 
+    document.addEventListener("DOMContentLoaded", async () => {
+        const userDataContainer = document.getElementById("userDataContainer")
+        const token = localStorage.getItem("jwtToken")
+        try {
+            const response = await fetch(API_BASE_URL + "getUserData.php", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const userData = await response.json();
+
+            if(response.ok){
+
+                userDataContainer.innerHTML= `
+                <div id="userDataDiv" class="login-form">
+                    <label id="nombre">Nombre: ${userData.name}</label><br>
+                    <label id="apellido">Apellido: ${userData.lastname}</label><br>
+                    <label id="telefono">Teléfono: ${userData.phone}</label><br>
+                    <label id="correo">Correo: ${userData.email}</label><br>
+                </div> 
+                `;
+            }else{
+                alert("Error: " + result.message);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            userDataContainer.innerHTML = "<p>Error al cargar los datos del usuario.</p>";
+        }
+    });
+
+
 }
+
+/**
+ * <div id="userDataDiv" class="login-form">
+        <label id="nombre">Nombre: Cargando...</label><br>
+        <label id="apellido">Apellido: Cargando...</label><br>
+        <label id="telefono">Teléfono: Cargando...</label><br>
+        <label id="correo">Correo: Cargando...</label><br>
+    </div> 
+*/
 
 
 // Seccion Mis Reservas
@@ -324,6 +367,8 @@ if (detailsContainer){
     });
 }
 
+
+// Seccion de datos de la persona que reserva
 
 if (informationContainer){
 
