@@ -7,38 +7,31 @@
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
-    <div class="header-content">
-        <a href="../public/index.html">
+
+    <!-- Encabezado -->
+    <header>
+        <div class="header-content">
             <img src="../styles/Logo_T.png" alt="Logo de la empresa" class="logo">
-        </a>
-        <h1>T-Renting</h1>
-    </div>
-
-    <!-- Menú desplegable con icono de 3 rayas -->
-    <div class="dropdown">
-        <button class="dropbtn">
-            <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
-        </button>
-        <div class="dropdown-content">
-            <a href="myaccount.html">Mi Perfil</a>
-            <a href="mybookings.html">Mis Reservas</a>
-            <a href="enteramount.html">Añadir fondos</a>
-            <a href="logout.php">Logout</a>
+            <h1>T-Renting</h1>
         </div>
-    </div>
-</header>
 
-<!-- Menú principal -->
-<nav class="menu-container">
-    <ul class="menu-options">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="booking.html">Reservas</a></li>
-        <li><a href="contact.html">Contacto</a></li>
-    </ul>
-</nav>
+        <!-- Menú desplegable con icono de 3 rayas -->
+        <div class="dropdown">
+            <button class="dropbtn">
+                <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+            </button>
+            <div class="dropdown-content">
+                <a id="myAccountButton" href="myaccount.html">Mi Perfil</a>
+                <a id="myBookingsButton" href="mybookings.html">Mis Reservas</a>
+                <a id="logoutButton" href="#">Cerrar sesion</a>
+            </div>
+        </div>
+    </header>
+    
     <div id="detailsContainer" class="container">
         <!-- Los detalles de la reserva se generan dinamicamente -->
     </div>
+
     <script src="../js/main.js"></script>
 </body>
 </html>

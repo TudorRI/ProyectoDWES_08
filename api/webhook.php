@@ -1,5 +1,6 @@
 <?php
 require '../config/config.php';
+require '../vendor/autoload.php';
 
 $payload = @file_get_contents('php://input');
 $event = null;

@@ -7,6 +7,11 @@ const carContainer = document.getElementById("car-list");
 const bookingDates = document.getElementById("bookingDates");
 const detailsContainer = document.getElementById("detailsContainer");
 const bookingContainer = document.getElementById("bookingContainer");
+const informationContainer =  document.getElementById("informationContainer")
+const informationForm = document.getElementById("informationForm");
+const logoutButton = document.getElementById("logoutButton");
+const myAccountButton = document.getElementById("myAccountButton");
+const myBookingsButton = document.getElementById("myBookingsButton");
 
 
 
@@ -37,7 +42,7 @@ if (loginForm){
     
                 // Si el servidor devuelve un token, lo guardamos
                 if(result.token){
-                    localStorage.setItem('jwt', result.token);
+                    localStorage.setItem('jwtToken', result.token);
                     alert("Inicio de sesion exitoso");
                     window.location.href= '../public/index.html'; // Redirigimos al index
                 }else{
@@ -92,6 +97,74 @@ if (registerForm){
             alert("No se pudo conectar con el servidor. Inténtalo más tarde.");
         }
     });
+}
+
+// Seccion de cerrar sesion
+
+if(logoutButton){
+
+    logoutButton.addEventListener("click", () => {  // Usar "click" en lugar de "onclick"
+
+        localStorage.removeItem("jwtToken")
+        sessionStorage.clear()
+        window.location.href= "../public/login.html"
+
+    })
+}
+
+// Seccion Mi Perfil
+if(myAccountButton){
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const userDataContainer = document.getElementById("userDataContainer")
+        const token = localStorage.getItem("jwtToken")
+        try {
+            const response = await fetch(API_BASE_URL + "getUserData.php", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const userData = await response.json();
+
+            if(response.ok){
+
+                userDataContainer.innerHTML= `
+                <div id="userDataDiv" class="login-form">
+                    <label id="nombre">Nombre: ${userData.name}</label><br>
+                    <label id="apellido">Apellido: ${userData.lastname}</label><br>
+                    <label id="telefono">Teléfono: ${userData.phone}</label><br>
+                    <label id="correo">Correo: ${userData.email}</label><br>
+                </div> 
+                `;
+            }else{
+                alert("Error: " + result.message);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            userDataContainer.innerHTML = "<p>Error al cargar los datos del usuario.</p>";
+        }
+    });
+
+
+}
+
+/**
+ * <div id="userDataDiv" class="login-form">
+        <label id="nombre">Nombre: Cargando...</label><br>
+        <label id="apellido">Apellido: Cargando...</label><br>
+        <label id="telefono">Teléfono: Cargando...</label><br>
+        <label id="correo">Correo: Cargando...</label><br>
+    </div> 
+*/
+
+
+// Seccion Mis Reservas
+if(myBookingsButton){
+
+
 }
 
 // Seccion Contacto
@@ -282,7 +355,7 @@ if (detailsContainer){
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
                         <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
-                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>
+                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>                    
                     </div>
                 `
             }else{
@@ -292,7 +365,84 @@ if (detailsContainer){
             alert("Error al cargar los detalles de la reserva: " + error.message);
         }
     });
-
 }
 
 
+// Seccion de datos de la persona que reserva
+
+if (informationContainer){
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const informationForm = document.getElementById("informationForm");
+    
+        if (informationForm) {
+            informationForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+    
+                let infoName = document.getElementById("infoName").value;
+                let infoLastName = document.getElementById("infoLastName").value;
+                let infoEmail = document.getElementById("infoEmail").value;
+                let infoPhone = document.getElementById("infoPhone").value;
+                let checkbox = document.getElementById("infoCheckUser");
+                let infoCheckUser = checkbox.checked;
+    
+                // Obtener el token JWT de localStorage
+                const token = localStorage.getItem("jwtToken");
+    
+                if (infoCheckUser && token) {
+                    try {
+                        const userResponse = await fetch(API_BASE_URL + "getUserData.php", {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
+                            }
+                        });
+    
+                        const userData = await userResponse.json();
+    
+                        if (userResponse.ok) {
+                            infoName = userData.name;
+                            infoLastName = userData.lastname;
+                            infoEmail = userData.email;
+                            infoPhone = userData.phone;
+                            alert("Informacion de usuario recibida correctamente");
+                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
+                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
+
+                            window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
+                        } else {
+                            alert("Error al obtener los datos del usuario.");
+                            return;
+                        }
+                    } catch (error) {
+                        alert("Error de conexión con el servidor: " + error.message);
+                        return;
+                    }
+                }else{
+                    try {
+                        const response = await fetch(API_BASE_URL + "bookingInformation.php", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ infoName, infoLastName, infoEmail, infoPhone })
+                        });
+        
+                        const result = await response.json();
+        
+                        if (response.ok) {
+                            alert("Mensaje enviado correctamente");
+                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
+                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
+                            informationForm.reset();
+                            window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
+                        } else {
+                            alert("Error: " + result.message);
+                        }
+                    } catch (error) {
+                        alert("Error al enviar el mensaje: " + error.message);
+                    }
+                }
+            });
+        }
+    });
+}
