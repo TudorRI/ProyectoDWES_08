@@ -12,6 +12,7 @@ const informationForm = document.getElementById("informationForm");
 const logoutButton = document.getElementById("logoutButton");
 const myAccountButton = document.getElementById("myAccountButton");
 const myBookingsButton = document.getElementById("myBookingsButton");
+const paymentForm = document.getElementById("paymentForm")
 
 
 
@@ -374,6 +375,15 @@ if (informationContainer){
 
     document.addEventListener("DOMContentLoaded", function () {
         const informationForm = document.getElementById("informationForm");
+        let checkbox = document.getElementById("infoCheckUser");
+        const inputs = informationForm.querySelectorAll("input:not([type='checkbox'])") // Con esta sentencia seleccionaremos todos los inputs del formulario excpeto los checkboxes
+
+        // Evento para bloquear/desbloquear los inputs cuando se marca el checkbox
+        checkbox.addEventListener("change", function () {
+            inputs.forEach(input => {
+                input.disabled = checkbox.checked;
+            });
+        });
     
         if (informationForm) {
             informationForm.addEventListener("submit", async (event) => {
@@ -383,7 +393,6 @@ if (informationContainer){
                 let infoLastName = document.getElementById("infoLastName").value;
                 let infoEmail = document.getElementById("infoEmail").value;
                 let infoPhone = document.getElementById("infoPhone").value;
-                let checkbox = document.getElementById("infoCheckUser");
                 let infoCheckUser = checkbox.checked;
     
                 // Obtener el token JWT de localStorage
@@ -407,9 +416,6 @@ if (informationContainer){
                             infoEmail = userData.email;
                             infoPhone = userData.phone;
                             alert("Informacion de usuario recibida correctamente");
-                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
-                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
-
                             window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
                         } else {
                             alert("Error al obtener los datos del usuario.");
@@ -431,8 +437,6 @@ if (informationContainer){
         
                         if (response.ok) {
                             alert("Mensaje enviado correctamente");
-                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
-                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
                             informationForm.reset();
                             window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
                         } else {
@@ -445,4 +449,45 @@ if (informationContainer){
             });
         }
     });
+}
+
+// Seccion de pago y de realizacion de la reserva
+
+if(paymentForm){
+
+    paymentForm.addEventListener('submit', async (event) =>{
+
+        event.preventDefault();
+
+        const cardNumber = document.getElementById("cardNumber")
+        const cardHolder = document.getElementById("cardHolder")
+        const expireDate = document.getElementById("expireDate")
+        const cvv = document.getElementById("cvv")
+
+        // Obtener el token JWT de localStorage
+        const token = localStorage.getItem("jwtToken");
+
+        try{
+            const response = await fetch(API_BASE_URL + "payment.php", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify([cardNumber, cardHolder, expireDate, cvv])
+            });
+    
+            const result = await response.json();
+    
+            if(response.ok){
+    
+    
+            }else{
+                alert("No se ha podido hacer la compra")
+            }
+        }catch(error){
+            alert("Error: " + error.message)
+        }
+
+    })
 }
