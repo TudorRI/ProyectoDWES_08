@@ -10,12 +10,11 @@ const bookingContainer = document.getElementById("bookingContainer");
 const informationContainer =  document.getElementById("informationContainer")
 const informationForm = document.getElementById("informationForm");
 const logoutButton = document.getElementById("logoutButton");
-const myAccountButton = document.getElementById("myAccountButton");
-const myBookingsButton = document.getElementById("myBookingsButton");
+const userDataContainer = document.getElementById("userDataContainer");
+const userBookingsContainer = document.getElementById("userBookingsContainer");
 const paymentForm = document.getElementById("paymentForm")
 const successContainer = document.getElementById("successContainer")
 const datesContainer = document.getElementById("datesContainer")
-const userDataContainer = document.getElementById("userDataContainer");
 
 
 
@@ -89,11 +88,8 @@ if (registerForm){
             const result = await response.json();
     
             if (response.ok) {
-                console.log("Hola mundo");
                 alert("Registro exitoso. Serás redirigido al login.");
-                
-                // Redirigimos al login
-                window.location.href = '../public/login.html';
+                window.location.href = '../public/login.html'; // Redirigimos al login
             } else {
                 alert(result.error || "Error en el registro.");
             }
@@ -159,9 +155,97 @@ if (userDataContainer) {
 
 
 // Seccion Mis Reservas
-if(myBookingsButton){
+if(userBookingsContainer){
 
+    document.addEventListener("DOMContentLoaded", async () => {
+        
+        const token = localStorage.getItem("jwtToken");
 
+        try {
+            const response = await fetch(API_BASE_URL + "getUserBookings.php", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({}) // Enviar un body vacío si es necesario
+            });
+
+            const userBookings = await response.json();
+
+            if(!response.ok){
+                userBookingsContainer.innerHTML = `<p>${userBookings.message}</p>`;
+            }else{
+                // Limpiar el contenedor antes de agregar las tarjetas
+                userBookingsContainer.innerHTML = "";
+
+                 // Iterar sobre cada reserva y crear una tarjeta para cada una
+                 userBookings.reservations.forEach(reserva => {
+                    const card = document.createElement("div");
+                    card.classList.add("card", "mb-3");
+
+                    const cardBody = document.createElement("div");
+                    cardBody.classList.add("card-body");
+
+                    // Crear el contenido de la tarjeta
+                    cardBody.innerHTML = `
+                        <h5 class="card-title">Reserva #${reserva.codigo_reserva}</h5>
+                        <p><strong>Cliente:</strong> ${reserva.nombre} ${reserva.apellidos}</p>
+                        <p><strong>Teléfono:</strong> ${reserva.telefono}</p>
+                        <p><strong>Email:</strong> ${reserva.email}</p>
+                        <p><strong>Coche:</strong> ${reserva.marca_coche} - ${reserva.modelo_coche}</p>
+                        <p><strong>Desde:</strong> ${reserva.fecha_inicio}</p>
+                        <p><strong>Hasta:</strong> ${reserva.fecha_fin}</p>
+                        <p><strong>Total pagado:</strong> ${reserva.total_pagado}€</p>
+                    `;
+
+                    // Crear el botón de cancelación
+                    const cancelButton = document.createElement("button");
+                    cancelButton.textContent = "Cancelar Reserva";
+                    cancelButton.classList.add("btn", "btn-danger", "mt-3"); // Añadir clases de Bootstrap
+                    cancelButton.addEventListener("click", async () => {
+                        if (confirm("¿Estás seguro de que deseas cancelar esta reserva?")) {
+                            try {
+                                const cancelResponse = await fetch(API_BASE_URL + "cancelBooking.php", {
+                                    method: "POST",
+                                    headers: {
+                                        "Authorization": `Bearer ${token}`,
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({ codigo_reserva: reserva.codigo_reserva })
+                                });
+
+                                const cancelResult = await cancelResponse.json();
+
+                                if (cancelResponse.ok) {
+                                    alert(cancelResult.message || cancelResult.success); // Mostrar mensaje de éxito
+                                    card.remove(); // Eliminar la tarjeta de la vista
+                                } else {
+                                    alert(cancelResult.message || cancelResult.error); // Mostrar mensaje de error
+                                }
+                            } catch (error) {
+                                console.error("Error al cancelar la reserva:", error);
+                                alert("Error al cancelar la reserva.");
+                            }
+                        }
+                    });
+
+                    // Agregar el botón de cancelación al cuerpo de la tarjeta
+                    cardBody.appendChild(cancelButton);
+
+                    // Agregar el cuerpo de la tarjeta a la tarjeta
+                    card.appendChild(cardBody);
+
+                    // Agregar la tarjeta al contenedor de reservas
+                    userBookingsContainer.appendChild(card);
+                });
+            }
+
+        } catch (error) {
+            console.error("Error al obtener las reservas:", error);
+            userBookingsContainer.innerHTML = `<p>Error al cargar las reservas del usuario.</p>`;
+        }
+    });
 }
 
 // Seccion Contacto
@@ -234,7 +318,7 @@ if (carContainer) {
                             <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
                         </div>
                     </form>
-                `;
+                `
 
                 carContainer.appendChild(carCard);
             });
@@ -292,10 +376,7 @@ if (carContainer) {
 
 if(datesContainer){
 
-    console.log("1")
     document.addEventListener("DOMContentLoaded", async () => {
-
-        console.log("2")
 
         // Obtener el token JWT de localStorage
         const token = localStorage.getItem("jwtToken");
@@ -304,13 +385,7 @@ if(datesContainer){
 
         const id_car = selectedCarAvailability['id']
 
-        console.log("3")
-
-
-
         try{
-            console.log("4")
-
             const dateResponse = await fetch(API_BASE_URL + 'disponibilidad.php', {
                 method: 'POST',
                 headers: {
@@ -319,24 +394,14 @@ if(datesContainer){
                 },
                 body:JSON.stringify({ id_car })
             });
-
-            console.log("5")
-
         
             const dateResult = await dateResponse.json();
 
-            console.log("6")
-
-
             if(!dateResponse.ok){
-
-                console.log("7")
 
 
                 datesContainer.innerHTML = `<p>${dateResult.message}</p>`;
             }else{
-
-                console.log("8")
 
                 // Limpiar el contenedor antes de agregar las tarjetas
                 datesContainer.innerHTML = "";
@@ -344,8 +409,6 @@ if(datesContainer){
                 // Recorrer el array de reservas
                 dateResult.dates.forEach(date => {
                     // Crear la estructura de la tarjeta
-                    console.log("9")
-
                     const cardHTML = `
                         <div class="row">
                             <div class="col-md-4">
@@ -359,15 +422,11 @@ if(datesContainer){
                                 </div>
                             </div>
                         </div>
-
-
                     `;
 
                     // Insertar la tarjeta en el contenedor
                     datesContainer.innerHTML += cardHTML;
                 });
-                console.log("10")
-
             }
 
         }catch(error){
@@ -464,7 +523,7 @@ if (detailsContainer){
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
                         <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
-                        <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>                    
+                        <button onclick="window.location.href='../public/payment.html'" id="fillInformation">Rellenar información personal</button>                    
                     </div>
                 `
             }else{
@@ -476,88 +535,6 @@ if (detailsContainer){
     });
 }
 
-
-// Seccion de datos de la persona que reserva
-
-if (informationContainer){
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const informationForm = document.getElementById("informationForm");
-        let checkbox = document.getElementById("infoCheckUser");
-        const inputs = informationForm.querySelectorAll("input:not([type='checkbox'])") // Con esta sentencia seleccionaremos todos los inputs del formulario excpeto los checkboxes
-
-        // Evento para bloquear/desbloquear los inputs cuando se marca el checkbox
-        checkbox.addEventListener("change", function () {
-            inputs.forEach(input => {
-                input.disabled = checkbox.checked;
-            });
-        });
-    
-        if (informationForm) {
-            informationForm.addEventListener("submit", async (event) => {
-                event.preventDefault();
-    
-                let infoName = document.getElementById("infoName").value;
-                let infoLastName = document.getElementById("infoLastName").value;
-                let infoEmail = document.getElementById("infoEmail").value;
-                let infoPhone = document.getElementById("infoPhone").value;
-                let infoCheckUser = checkbox.checked;
-    
-                // Obtener el token JWT de localStorage
-                const token = localStorage.getItem("jwtToken");
-    
-                if (infoCheckUser && token) {
-                    try {
-                        const userResponse = await fetch(API_BASE_URL + "getUserData.php", {
-                            method: "POST",
-                            headers: {
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json"
-                            }
-                        });
-    
-                        const userData = await userResponse.json();
-    
-                        if (userResponse.ok) {
-                            infoName = userData.name;
-                            infoLastName = userData.lastname;
-                            infoEmail = userData.email;
-                            infoPhone = userData.phone;
-                            alert("Informacion de usuario recibida correctamente");
-                            window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
-                        } else {
-                            alert("Error al obtener los datos del usuario.");
-                            return;
-                        }
-                    } catch (error) {
-                        alert("Error de conexión con el servidor: " + error.message);
-                        return;
-                    }
-                }else{
-                    try {
-                        const response = await fetch(API_BASE_URL + "bookingInformation.php", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ infoName, infoLastName, infoEmail, infoPhone })
-                        });
-        
-                        const result = await response.json();
-        
-                        if (response.ok) {
-                            alert("Mensaje enviado correctamente");
-                            informationForm.reset();
-                            window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
-                        } else {
-                            alert("Error: " + result.message);
-                        }
-                    } catch (error) {
-                        alert("Error al enviar el mensaje: " + error.message);
-                    }
-                }
-            });
-        }
-    });
-}
 
 // Seccion de pago y de realizacion de la reserva
 
