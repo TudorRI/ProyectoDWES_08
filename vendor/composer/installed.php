@@ -1,9 +1,15 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
+<<<<<<< HEAD
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
         'reference' => '13250a8690e3aa2b0c2b14d7ae8af37a103d4b83',
+=======
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
+>>>>>>> 33f791d (Guardado)
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +17,15 @@
     ),
     'versions' => array(
         '__root__' => array(
+<<<<<<< HEAD
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
             'reference' => '13250a8690e3aa2b0c2b14d7ae8af37a103d4b83',
+=======
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
+>>>>>>> 33f791d (Guardado)
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -55,6 +67,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'stripe/stripe-php' => array(
             'pretty_version' => 'v16.5.1',
             'version' => '16.5.1.0',
@@ -64,6 +77,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> 33f791d (Guardado)
         'symfony/polyfill-ctype' => array(
             'pretty_version' => 'v1.31.0',
             'version' => '1.31.0.0',

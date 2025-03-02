@@ -4,9 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar T-Renting</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../styles/styleMain.css">
 </head>
 <body>
+=======
+    <link rel="stylesheet" href="../styles/css/buttons.css">
+    <link rel="stylesheet" href="../styles/css/calendar.css">
+    <link rel="stylesheet" href="../styles/css/car-container.css">
+    <link rel="stylesheet" href="../styles/css/contact.css">
+    <link rel="stylesheet" href="../styles/css/container.css">
+    <link rel="stylesheet" href="../styles/css/dropdown.css">
+    <link rel="stylesheet" href="../styles/css/generalConf.css">
+    <link rel="stylesheet" href="../styles/css/login.css">        
+    <link rel="stylesheet" href="../styles/css/mainMenu.css"> 
+    <link rel="stylesheet" href="../styles/css/map.css"> 
+    <link rel="stylesheet" href="../styles/css/testimonials.css"> 
+    <link rel="stylesheet" href="../styles/css/why-choose-us.css">
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="header-content">
+            <img src="../styles/Logo_T.png" alt="Logo de la empresa" class="logo">
+            <h1>T-Renting</h1>
+        </div>
+
+        <!-- Menú desplegable con icono de 3 rayas -->
+        <div class="dropdown">
+            <button class="dropbtn" id="dropdownBtn">
+                <div class="hamburger-icon"></div> <!-- Icono de las 3 rayas -->
+            </button>
+            <div class="dropdown-content" id="dropdownContent">
+                <a id="myAccountButton" href="myaccount.html">Mi Perfil</a>
+                <a id="myBookingsButton" href="mybookings.html">Mis Reservas</a>
+                <a id="logoutButton" href="#">Cerrar sesión</a>
+                <button class="cancelbtn" id="closeDropdown">Cerrar</button>
+            </div>
+        </div>
+    </header>
+
+    
+>>>>>>> 33f791d (Guardado)
     <div id="bookingContainer" class="container">
         <div class="right-section">
             <form id="bookingDates" class="calendar-form" method="POST">
@@ -17,7 +57,11 @@
                     <label for="">Fecha de fin de reserva</label><br>
                     <input id="finalDate" type="date" placeholder="Fecha de fin de reserva" required>
                 </div>
+<<<<<<< HEAD
                 <button type="submit">Reservar</button>
+=======
+                <button id="reservarButton" type="submit">Reservar</button>
+>>>>>>> 33f791d (Guardado)
     
                 <button class="cancelbtn" type="menu">Cancelar</button>
             </form>
@@ -25,5 +69,9 @@
         </div>
     </div>
     <script src="../js/main.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="../js/dropdown.js"></script>
+>>>>>>> 33f791d (Guardado)
 </body>
 </html>

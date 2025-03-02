@@ -1,0 +1,38 @@
+/* Configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a2e1a;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #2d5a2d;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;  /* Asegura que el logo y el menú estén separados */
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    max-width: 80px;
+    height: auto;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+}

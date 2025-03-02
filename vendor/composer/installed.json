@@ -294,6 +294,7 @@
             "install-path": "../phpoption/phpoption"
         },
         {
+<<<<<<< HEAD
             "name": "stripe/stripe-php",
             "version": "v16.5.1",
             "version_normalized": "16.5.1.0",
@@ -356,6 +357,8 @@
             "install-path": "../stripe/stripe-php"
         },
         {
+=======
+>>>>>>> 33f791d (Guardado)
             "name": "symfony/polyfill-ctype",
             "version": "v1.31.0",
             "version_normalized": "1.31.0.0",

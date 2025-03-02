@@ -10,12 +10,17 @@ use Firebase\JWT\Key;
 
 require '../config/config.php';
 require '../vendor/autoload.php';
+<<<<<<< HEAD
+=======
+require '../api/auth.php';
+>>>>>>> 33f791d (Guardado)
 
 //Configuración de errores EN PRODUCCION
 /*ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');*/
 
+<<<<<<< HEAD
 $headers = getallheaders(); // Obtener los headers de la petición
 
 if (!isset($headers['Authorization'])) {
@@ -32,6 +37,12 @@ $secretKey = $_ENV['JWT_SECRET']; // Usa la misma clave secreta con la que gener
 try {
     $decoded = JWT::decode($token, new Key($secretKey, 'HS256')); // Desencriptamos el token para obtener los datos
     $user_id= $decoded->user_id; // Extraemos el ID del user
+=======
+$userData = verificarToken();
+
+try {
+    $user_id = $userData->user_id; // Extraemos el ID del USER
+>>>>>>> 33f791d (Guardado)
     
     $stmt = $pdo->prepare("SELECT NAME, LASTNAME, EMAIL, PHONE FROM USER WHERE ID_USER = ?");
     $stmt -> execute([$user_id]);

@@ -2,7 +2,6 @@
 
 require '../config/config.php';
 require '../vendor/autoload.php';
-require '../api/auth.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -28,16 +27,17 @@ $dotenv->load();
 $smtpMailUsername = $_ENV['SMTP_MAIL_USERNAME'];
 $smtpMailPassword = $_ENV['SMTP_MAIL_PASSWORD'];
 
-$userData = verificarToken();
-$user_id = $userData->user_id;
+$data = json_decode(file_get_contents("php://input"), true);
 
-$sql = ("SELECT NAME, EMAIL FROM USER WHERE ID_USER = ?");
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$user_id]);
-$user= $stmt->fetch(PDO::FETCH_ASSOC);
+$nombre = $data['nombre'];
+$email = $data['email'];
+$mensaje = $data['mensaje'];
 
-$name = $user['NAME'];
-$email = $user['EMAIL'];
+// Validación de datos
+if (empty($nombre) || empty($email) || empty($mensaje)) {
+    echo json_encode(["error" => "Todos los campos son obligatorios"]);
+    exit;
+}
 
 // Configuramos el correo con SMTP
 
@@ -55,16 +55,16 @@ try {
 
     // Remitente y destinatario
     $mail->setFrom('trentingsoporte@gmail.com', 'T-Renting Soporte');
-    $mail->addAddress($email, $name); // Envía el correo al usuario que escribió en el formulario
+    $mail->addAddress($email, $nombre); // Envía el correo al usuario que escribió en el formulario
 
     // Contenido del correo
     $mail->isHTML(true);
-    $mail->Subject = "Confirmacion de Reserva - T-Renting";
+    $mail->Subject = "Notificacion Contacto - T-Renting";
     $mail->Body    = "
-        <p>Hola <strong>$name</strong>,</p>
-        <p>Hemos recibido el pago y confirmado tu reserva</p>
-        <p>Para consultar los detalles de la reserva, entra en nuestra pagina web y ve al apartado Mis Reservas.</p>
-        <p>Esperamos que disfrutes mucho tu vehículo. Para cualquier duda, no dudes en contactar con nosotros via teléfono o email.</p><br></br>
+        <p>Hola <strong>$nombre</strong>,</p>
+        <p>Hemos recibido tu mensaje:</p>
+        <blockquote>$mensaje</blockquote>
+        <p>Nos pondremos en contacto contigo lo antes posible.</p>
         <p>Atentamente, <br> <strong>El equipo de T-Renting</strong></p>
     ";
 
@@ -72,7 +72,7 @@ try {
     $mail->send();
 
     http_response_code(200);
-    echo json_encode(["success" => "Mensaje de confirmacion enviado correctamente"]);
+    echo json_encode(["success" => "Mensaje enviado correctamente"]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(["error" => "Error al enviar el mensaje: " . $mail->ErrorInfo]);

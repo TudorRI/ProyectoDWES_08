@@ -1,0 +1,28 @@
+/* Menú principal */
+.menu-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.menu-options {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu-options a {
+    text-decoration: none;
+    color: #2d5a2d;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-options a:hover {
+    background-color: #2d5a2d;
+    color: white;
+}

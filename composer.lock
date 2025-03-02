@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "5dfb742de1d6b03b77752c99c15dc841",
+=======
+    "content-hash": "d713bd8df160e3fcfcc2c7b678780efc",
+>>>>>>> 33f791d (Guardado)
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -288,6 +292,7 @@
             "time": "2024-07-20T21:41:07+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "stripe/stripe-php",
             "version": "v16.5.1",
             "source": {
@@ -347,6 +352,8 @@
             "time": "2025-02-07T21:24:29+00:00"
         },
         {
+=======
+>>>>>>> 33f791d (Guardado)
             "name": "symfony/polyfill-ctype",
             "version": "v1.31.0",
             "source": {
