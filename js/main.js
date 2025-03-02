@@ -3,7 +3,7 @@ const API_BASE_URL = "http://localhost:8000/api/";
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const contactMessage =  document.getElementById("contactMessage");
-const carContainer = document.getElementById("car-list");
+const carContainer = document.getElementById("carContainer");
 const bookingDates = document.getElementById("bookingDates");
 const detailsContainer = document.getElementById("detailsContainer");
 const bookingContainer = document.getElementById("bookingContainer");
@@ -13,6 +13,10 @@ const logoutButton = document.getElementById("logoutButton");
 const myAccountButton = document.getElementById("myAccountButton");
 const myBookingsButton = document.getElementById("myBookingsButton");
 const paymentForm = document.getElementById("paymentForm")
+const successContainer = document.getElementById("successContainer")
+const datesContainer = document.getElementById("datesContainer")
+const userDataContainer = document.getElementById("userDataContainer");
+
 
 
 
@@ -114,52 +118,44 @@ if(logoutButton){
 }
 
 // Seccion Mi Perfil
-if(myAccountButton){
-
+if (userDataContainer) {
     document.addEventListener("DOMContentLoaded", async () => {
-        const userDataContainer = document.getElementById("userDataContainer")
-        const token = localStorage.getItem("jwtToken")
+        
+        const token = localStorage.getItem("jwtToken");
+
         try {
             const response = await fetch(API_BASE_URL + "getUserData.php", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
-                }
+                },
+                body: JSON.stringify({}) // Enviar un body vacío si es necesario
             });
 
             const userData = await response.json();
 
-            if(response.ok){
-
-                userDataContainer.innerHTML= `
-                <div id="userDataDiv" class="login-form">
-                    <label id="nombre">Nombre: ${userData.name}</label><br>
-                    <label id="apellido">Apellido: ${userData.lastname}</label><br>
-                    <label id="telefono">Teléfono: ${userData.phone}</label><br>
-                    <label id="correo">Correo: ${userData.email}</label><br>
-                </div> 
+            if (response.ok) {
+                userDataContainer.innerHTML = `
+                    <div id="userDataDiv" class="login-form">
+                        <label id="nombre">Nombre: ${userData.name}</label><br>
+                        <label id="apellido">Apellido: ${userData.lastname}</label><br>
+                        <label id="telefono">Teléfono: ${userData.phone}</label><br>
+                        <label id="correo">Correo: ${userData.email}</label><br>
+                    </div> 
                 `;
-            }else{
-                alert("Error: " + result.message);
+            } else {
+                console.error("Error en la respuesta del servidor:", userData.message);
+                userDataContainer.innerHTML = `<p>Error: ${userData.message}</p>`;
             }
+
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Error en la petición:", error);
             userDataContainer.innerHTML = "<p>Error al cargar los datos del usuario.</p>";
         }
     });
-
-
 }
 
-/**
- * <div id="userDataDiv" class="login-form">
-        <label id="nombre">Nombre: Cargando...</label><br>
-        <label id="apellido">Apellido: Cargando...</label><br>
-        <label id="telefono">Teléfono: Cargando...</label><br>
-        <label id="correo">Correo: Cargando...</label><br>
-    </div> 
-*/
 
 
 // Seccion Mis Reservas
@@ -180,16 +176,16 @@ if (contactMessage){
         const mensaje = document.getElementById('mensaje').value;
 
         try{
-            const response = await fetch(API_BASE_URL + 'emailconfirmation.php', {
+            const response = await fetch(API_BASE_URL + 'emailContact.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body:JSON.stringify({ nombre, email, mensaje})
+                body:JSON.stringify({ nombre, email, mensaje })
             });
 
             const result = await response.json();
 
             if (response.ok){
-                alert("Mensaje enviado correctamente");
+                alert(result.message || result.success);
                 contactMessage.reset();
             }else{
                 alert("Error: " + result.message);
@@ -235,7 +231,7 @@ if (carContainer) {
                             <input type="hidden" name="car_day_price" value="${car.DAY_PRICE}">
 
                             <button type="submit" class="btn-reservar">Reservar</button>
-                            <button type="button" class="btn-contacto">Contactar</button>
+                            <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
                         </div>
                     </form>
                 `;
@@ -264,9 +260,119 @@ if (carContainer) {
                     window.location.href = "../public/calendar.html";
                 });
             });
+
+            // Agregar evento click a los botones "Ver disponibilidad"
+            cars.forEach(car => {
+                const verDisponibilidadBtn = document.getElementById(`verDisponibilidadBtn-${car.ID_CAR}`);
+                if (verDisponibilidadBtn) {
+                    verDisponibilidadBtn.addEventListener("click", () => {
+                        // Guardar el coche seleccionado en sessionStorage
+                        const carDataAvailability = {
+                            id: car.ID_CAR,
+                            brand: car.BRAND,
+                            model: car.MODEL,
+                            release_year: car.RELEASE_YEAR,
+                            day_price: car.DAY_PRICE,
+                        };
+                        sessionStorage.setItem("selectedCarAvailability", JSON.stringify(carDataAvailability));
+
+                        // Redirigir a la página de disponibilidad
+                        window.location.href = "../public/disponibilidad.html";
+                    });
+                }
+            });
         } catch (error) {
             console.error("Error:", error);
             carContainer.innerHTML = "<p>Error al cargar los coches.</p>";
+        }
+    });
+}
+
+// Disponibilidad de fechas del coche seleccionado
+
+if(datesContainer){
+
+    console.log("1")
+    document.addEventListener("DOMContentLoaded", async () => {
+
+        console.log("2")
+
+        // Obtener el token JWT de localStorage
+        const token = localStorage.getItem("jwtToken");
+
+        const selectedCarAvailability = JSON.parse(sessionStorage.getItem("selectedCarAvailability"));
+
+        const id_car = selectedCarAvailability['id']
+
+        console.log("3")
+
+
+
+        try{
+            console.log("4")
+
+            const dateResponse = await fetch(API_BASE_URL + 'disponibilidad.php', {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify({ id_car })
+            });
+
+            console.log("5")
+
+        
+            const dateResult = await dateResponse.json();
+
+            console.log("6")
+
+
+            if(!dateResponse.ok){
+
+                console.log("7")
+
+
+                datesContainer.innerHTML = `<p>${dateResult.message}</p>`;
+            }else{
+
+                console.log("8")
+
+                // Limpiar el contenedor antes de agregar las tarjetas
+                datesContainer.innerHTML = "";
+
+                // Recorrer el array de reservas
+                dateResult.dates.forEach(date => {
+                    // Crear la estructura de la tarjeta
+                    console.log("9")
+
+                    const cardHTML = `
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card border-primary mb-3">
+                                    <div class="card-header bg-primary text-white">Reserva #${date.ID_BOOKING}</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-calendar-check"></i> Fechas de la reserva</h5>
+                                        <p class="card-text"><strong>Fecha de inicio:</strong> ${date.DATE_START}</p>
+                                        <p class="card-text"><strong>Fecha de fin:</strong> ${date.DATE_FINISH}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    `;
+
+                    // Insertar la tarjeta en el contenedor
+                    datesContainer.innerHTML += cardHTML;
+                });
+                console.log("10")
+
+            }
+
+        }catch(error){
+            alert("Ha habido un error al seleccionar la disponibilidad de fechas: " + error.message)
+            console.error(error.message)
         }
     });
 }
@@ -281,6 +387,8 @@ if(bookingContainer){
         const today = new Date().toISOString().split('T')[0];
         document.getElementById("initialDate").setAttribute("min", today);
         document.getElementById("finalDate").setAttribute("min", today);
+
+        
 
         bookingDates.addEventListener('submit',  async(event) =>{
 
@@ -301,12 +409,12 @@ if(bookingContainer){
     
                 const result = await response.json();
                 if(response.ok){
-                    alert("Fechas seleccionadas con exito");
+                    alert(result.message);
                     const selectedDates = [initialDate, finalDate];
                     sessionStorage.setItem("selectedDates", JSON.stringify(selectedDates));
                     window.location.href= "../public/bookingdetails.html";
                 }else{
-                    alert("Error: " + result.message);
+                    alert("Error: " + result.error);
                 }
             }catch(error){
                 alert("Error al seleccionar las fechas: " + error.message);
@@ -459,35 +567,77 @@ if(paymentForm){
 
         event.preventDefault();
 
-        const cardNumber = document.getElementById("cardNumber")
-        const cardHolder = document.getElementById("cardHolder")
-        const expireDate = document.getElementById("expireDate")
-        const cvv = document.getElementById("cvv")
+        // Obtenemos los datos de la tarjeta
+        const cardNumber = document.getElementById("cardNumber").value
+        const cardHolder = document.getElementById("cardHolder").value
+        const expireDate = document.getElementById("expireDate").value
+        const cvv = document.getElementById("cvv").value
+
+        // Recuperamos los arrays del session storage
+        const selectedCar = JSON.parse(sessionStorage.getItem("selectedCar"));
+        const selectedDates = JSON.parse(sessionStorage.getItem("selectedDates"));
+
+        // Definimos las variables que necesitamos para hacer la reserva
+        const id_car = selectedCar['id']
+        const initialDate = selectedDates[0]
+        const finalDate = selectedDates[1]
+        const total = JSON.parse(sessionStorage.getItem("total"));
 
         // Obtener el token JWT de localStorage
         const token = localStorage.getItem("jwtToken");
 
         try{
-            const response = await fetch(API_BASE_URL + "payment.php", {
+            const paymentResponse = await fetch(API_BASE_URL + "payment.php", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body:JSON.stringify([cardNumber, cardHolder, expireDate, cvv])
+                body:JSON.stringify({cardNumber, cardHolder, expireDate, cvv, id_car, initialDate, finalDate, total})
             });
     
-            const result = await response.json();
+            const paymentResult = await paymentResponse.json();
     
-            if(response.ok){
+            if(!paymentResponse.ok){
     
-    
+                alert("No se ha podido hacer la compra: " + (paymentResult.error || paymentResult.message))  
+                return
             }else{
-                alert("No se ha podido hacer la compra")
-            }
-        }catch(error){
-            alert("Error: " + error.message)
-        }
+                try{
+                    const emailResponse = await fetch(API_BASE_URL + "emailConfirmation.php", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
+                        }
+                    })
 
+                    const emailResult = await emailResponse.json();
+                
+                    if(emailResponse.ok){
+                        alert("Reserva completada. " + emailResult.success || emailResult.message);
+                        sessionStorage.clear();
+                        window.location.href = '../public/success.html'
+
+                    }else{
+                        alert(emailResult.message || emailResult.error)
+                    }
+                }catch(error){
+                    alert("Error en el emailConfirmation: " + error.message)
+                }
+            }
+
+        }catch(error){
+            alert("Error en el payment: " + error.message)
+
+        }
     })
+}
+
+// Seccion Informativa de Exito de Pago
+
+if(successContainer){
+    setTimeout(() => {
+        window.location.href = "../public/index.html"; // Redirige tras unos segundos a la pagina principal
+    }, 4000);
 }
