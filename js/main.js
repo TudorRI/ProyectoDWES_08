@@ -232,7 +232,6 @@ if (carContainer) {
 
                         <button type="submit" class="btn-reservar">Reservar</button>
                         <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
-                        <button type="button" class="btn-detalles" id="verDetallesBtn-${car.ID_CAR}">Ver detalles</button>
                     </div>
                 </form>
                 `;
@@ -642,13 +641,3 @@ if(successContainer){
         window.location.href = "../public/index.html"; // Redirige tras unos segundos a la pagina principal
     }, 4000);
 }
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".btn-detalles").forEach(button => {
-        button.addEventListener("click", function () {
-            const carId = this.id.split("-")[1]; // Obtener el ID del coche
-            window.location.href = `rental1.html?id=${carId}`;
-        });
-    });
-});
