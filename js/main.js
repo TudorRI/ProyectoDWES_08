@@ -407,7 +407,8 @@ if(datesContainer){
             const dateResult = await dateResponse.json();
 
             if(!dateResponse.ok){
-                datesContainer.innerHTML = `<p>${dateResult.message || dateResult.error}</p>`;
+                alert(dateResult.error || dateResult.message)
+                window.location.href = "../public/booking.html"
             }else{
 
                 // Limpiar el contenedor antes de agregar las tarjetas
@@ -446,10 +447,7 @@ if(datesContainer){
 
 if(datesContainer){
 
-    console.log("1")
     document.addEventListener("DOMContentLoaded", async () => {
-
-        console.log("2")
 
         // Obtener el token JWT de localStorage
         const token = localStorage.getItem("jwtToken");
@@ -458,12 +456,7 @@ if(datesContainer){
 
         const id_car = selectedCarAvailability['id']
 
-        console.log("3")
-
-
-
         try{
-            console.log("4")
 
             const dateResponse = await fetch(API_BASE_URL + 'disponibilidad.php', {
                 method: 'POST',
@@ -473,24 +466,12 @@ if(datesContainer){
                 },
                 body:JSON.stringify({ id_car })
             });
-
-            console.log("5")
-
         
             const dateResult = await dateResponse.json();
 
-            console.log("6")
-
-
             if(!dateResponse.ok){
-
-                console.log("7")
-
-
                 datesContainer.innerHTML = `<p>${dateResult.message}</p>`;
             }else{
-
-                console.log("8")
 
                 // Limpiar el contenedor antes de agregar las tarjetas
                 datesContainer.innerHTML = "";
@@ -498,13 +479,11 @@ if(datesContainer){
                 // Recorrer el array de reservas
                 dateResult.dates.forEach(date => {
                     // Crear la estructura de la tarjeta
-                    console.log("9")
-
                     const cardHTML = `
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card border-primary mb-3">
-                                    <div class="card-header bg-primary text-white">Reserva #${date.ID_BOOKING}</div>
+                                <div class="card border-success mb-3">
+                                    <div class="card-header bg-success text-white">Reserva #${date.ID_BOOKING}</div>
                                     <div class="card-body">
                                         <h5 class="card-title"><i class="bi bi-calendar-check"></i> Fechas de la reserva</h5>
                                         <p class="card-text"><strong>Fecha de inicio:</strong> ${date.DATE_START}</p>
@@ -513,15 +492,11 @@ if(datesContainer){
                                 </div>
                             </div>
                         </div>
-
-
                     `;
 
                     // Insertar la tarjeta en el contenedor
                     datesContainer.innerHTML += cardHTML;
                 });
-                console.log("10")
-
             }
 
         }catch(error){

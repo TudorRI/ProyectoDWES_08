@@ -62,8 +62,8 @@
 /* Botón de cerrar */
 .cancelbtn {
     padding: 10px;
-    background-color: #883131;
-    color: white;
+    background-color: white;
+    color: #883131;
     border: none;
     width: 100%;
     text-align: center;
@@ -73,5 +73,6 @@
 }
 
 .cancelbtn:hover {
-    background-color: #3d1717;
+    background-color: #941c1c;
+    color: white;
 }

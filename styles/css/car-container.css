@@ -2,9 +2,9 @@
 .cars-container {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Aumenta el espacio entre cada tarjeta */
+    gap: 30px;
     width: 90%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 40px auto;
 }
 
@@ -16,10 +16,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
-    width: 100%; /* Todas las tarjetas ocupan el mismo ancho */
-    max-width: 600px; /* Ancho máximo para evitar tarjetas demasiado grandes */
-    height: 250px; /* Altura fija para todas las tarjetas */
-    margin: 0 auto; /* Centra las tarjetas */
+    width: 100%;
+    max-width: 1200px;
+    min-height: 250px; /* Permite crecer si el contenido es más grande */
+    margin: 0 auto;
 }
 
 .car-card:hover {
@@ -29,8 +29,13 @@
 /* Imagen del coche */
 .car-image {
     width: 50%;
-    height: 100%;
-    object-fit: cover; /* Evita distorsión y recorta si es necesario */
+    height: auto; /* Ajuste automático según la imagen */
+    max-height: 250px; /* Máximo tamaño para mantener coherencia */
+    object-fit: contain; /* Muestra la imagen completa sin cortarla */
+    background-color: #f0f0f0; /* Color de fondo para imágenes sin transparencia */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Información del coche */
@@ -39,15 +44,19 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .car-info h2 {
     color: #2d5a2d;
     margin-bottom: 10px;
+    font-size: 1.5em;
 }
 
 .car-info p {
     font-size: 1.1em;
     margin-bottom: 8px;
+    color: #444;
 }
