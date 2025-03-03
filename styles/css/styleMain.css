@@ -1,0 +1,450 @@
+/* Configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a2e1a;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #2d5a2d;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;  /* Asegura que el logo y el menú estén separados */
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    max-width: 80px;
+    height: auto;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+}
+
+/* Menú principal */
+.menu-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.menu-options {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu-options a {
+    text-decoration: none;
+    color: #2d5a2d;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-options a:hover {
+    background-color: #2d5a2d;
+    color: white;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Sección central con información */
+.center-section {
+    flex: 2;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos para las secciones de publicidad */
+.left-section, .right-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.ad-space {
+    text-align: center;
+}
+
+.ad-space img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Beneficios */
+.benefits {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.benefit-items {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.benefit {
+    max-width: 250px;
+    text-align: center;
+}
+
+.benefit img {
+    width: 60px;
+    height: 60px;
+}
+
+.benefit h3 {
+    margin-top: 10px;
+    color: #2d5a2d;
+}
+
+/* Testimonios */
+.testimonials {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 20px;
+}
+
+.testimonial-items {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial {
+    max-width: 300px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Contenedor de Contacto */
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de Contacto */
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.contact-info h2 {
+    color: #2d5a2d;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+/* Formulario de Contacto */
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.contact-form h2 {
+    color: #2d5a2d;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #2d5a2d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1a2e1a;
+}
+
+/* Mapa */
+.map {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.map h2 {
+    color: #2d5a2d;
+    margin-bottom: 10px;
+}
+
+/* Contenedor general de los coches */
+.cars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Aumenta el espacio entre cada tarjeta */
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Estilos de cada tarjeta */
+.car-card {
+    margin: auto;
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px; /* Espacio extra entre tarjetas */
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+}
+
+/* Imagen del coche */
+.car-image {
+    width: 50%; /* Reduce el tamaño de la imagen del coche */
+    object-fit: cover;
+}
+
+/* Formulario del coche */
+.car-form {
+    display: contents;
+}
+
+/* Información del coche */
+.car-info {
+    margin: auto;
+    padding: 20px;
+    flex: 1;
+}
+
+.car-info h2 {
+    color: #2d5a2d;
+    margin-bottom: 10px;
+}
+
+.car-info p {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+/* Botones */
+.btn-reservar, .btn-contacto {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reservar {
+    background-color: #2d5a2d;
+    color: white;
+}
+
+.btn-reservar:hover {
+    background-color: #1a2e1a;
+}
+
+.btn-contacto {
+    background-color: #f0a500;
+    color: white;
+}
+
+.btn-contacto:hover {
+    background-color: #d48c00;
+}
+
+/* Estilo del menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #2d5a2d;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1em;
+}
+
+.dropdown-content a:hover {
+    background-color: #2d5a2d;
+    color: white;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    display: block;
+    margin: 5px 0;
+}
+
+/* Botón de cancelar */
+.cancelbtn {
+    padding: 10px;
+    background-color: #883131;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancelbtn:hover {
+    background-color: #3d1717;
+}
+
+/* Formulario de calendario */
+.calendar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Formulario de login */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Sección "Por qué elegirnos" */
+.why-choose-us {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.why-choose-us h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.reason {
+    background: #ffffff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reason h3 {
+    color: #2d5a2d;
+    margin-bottom: 8px;
+}
+
+.reason p {
+    color: #555;
+    line-height: 1.5;
+}

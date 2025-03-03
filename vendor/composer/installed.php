@@ -1,9 +1,19 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
+<<<<<<< HEAD
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
+<<<<<<< HEAD
         'reference' => '8ad3740da53ff25511c727e84669d4b8c6e5282c',
+=======
+        'reference' => '13250a8690e3aa2b0c2b14d7ae8af37a103d4b83',
+=======
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
+>>>>>>> 33f791d (Guardado)
+>>>>>>> 9e00cbcb7005d0796cb293730a9b74df5f43e22b
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +21,19 @@
     ),
     'versions' => array(
         '__root__' => array(
+<<<<<<< HEAD
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
+<<<<<<< HEAD
             'reference' => '8ad3740da53ff25511c727e84669d4b8c6e5282c',
+=======
+            'reference' => '13250a8690e3aa2b0c2b14d7ae8af37a103d4b83',
+=======
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
+>>>>>>> 33f791d (Guardado)
+>>>>>>> 9e00cbcb7005d0796cb293730a9b74df5f43e22b
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -55,6 +75,21 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v16.5.1',
+            'version' => '16.5.1.0',
+            'reference' => '05c7c3a8a15b1bc396f09d17c88539c0db3d3255',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+=======
+>>>>>>> 33f791d (Guardado)
+>>>>>>> 9e00cbcb7005d0796cb293730a9b74df5f43e22b
         'symfony/polyfill-ctype' => array(
             'pretty_version' => 'v1.31.0',
             'version' => '1.31.0.0',

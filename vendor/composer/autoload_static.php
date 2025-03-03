@@ -18,6 +18,13 @@ class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            'Stripe\\' => 7,
+=======
+>>>>>>> 33f791d (Guardado)
+>>>>>>> 9e00cbcb7005d0796cb293730a9b74df5f43e22b
         ),
         'P' => 
         array (
@@ -51,6 +58,16 @@ class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+=======
+>>>>>>> 33f791d (Guardado)
+>>>>>>> 9e00cbcb7005d0796cb293730a9b74df5f43e22b
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',

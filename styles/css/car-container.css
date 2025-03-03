@@ -1,0 +1,53 @@
+/* Contenedor general de los coches */
+.cars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Aumenta el espacio entre cada tarjeta */
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Estilos de cada tarjeta */
+.car-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    width: 100%; /* Todas las tarjetas ocupan el mismo ancho */
+    max-width: 600px; /* Ancho máximo para evitar tarjetas demasiado grandes */
+    height: 250px; /* Altura fija para todas las tarjetas */
+    margin: 0 auto; /* Centra las tarjetas */
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+}
+
+/* Imagen del coche */
+.car-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover; /* Evita distorsión y recorta si es necesario */
+}
+
+/* Información del coche */
+.car-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+}
+
+.car-info h2 {
+    color: #2d5a2d;
+    margin-bottom: 10px;
+}
+
+.car-info p {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}

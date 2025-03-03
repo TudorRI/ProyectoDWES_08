@@ -1,0 +1,30 @@
+/* Botones */
+.btn-reservar, .btn-contacto {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reservar {
+    background-color: #2d5a2d;
+    color: white;
+}
+
+.btn-reservar:hover {
+    background-color: #1a2e1a;
+}
+
+.btn-contacto {
+    background-color: #f0a500;
+    color: white;
+}
+
+.btn-contacto:hover {
+    background-color: #d48c00;
+}

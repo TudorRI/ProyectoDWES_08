@@ -309,20 +309,20 @@ if (carContainer) {
                 carCard.classList.add("car-card");
 
                 carCard.innerHTML = `
-                    <img src="${API_BASE_URL + car.IMAGE_URL}" alt="${car.MODEL}" class="car-image">
-                    <form class="car-form">
-                        <div class="car-info">
-                            <h2>${car.BRAND} ${car.MODEL}</h2>
-                            <p><strong>Marca:</strong> ${car.BRAND}</p>
-                            <p><strong>Modelo:</strong> ${car.MODEL}</p>
-                            <p><strong>Año de lanzamiento:</strong> ${car.RELEASE_YEAR}</p>
-                            <p><strong>Precio por día:</strong> ${car.DAY_PRICE}€</p>
+                <img src="${API_BASE_URL + car.IMAGE_URL}" alt="${car.MODEL}" class="car-image">
+                <form class="car-form">
+                    <div class="car-info">
+                        <h2>${car.BRAND} ${car.MODEL}</h2>
+                        <p><strong>Marca:</strong> ${car.BRAND}</p>
+                        <p><strong>Modelo:</strong> ${car.MODEL}</p>
+                        <p><strong>Año de lanzamiento:</strong> ${car.RELEASE_YEAR}</p>
+                        <p><strong>Precio por día:</strong> ${car.DAY_PRICE}€</p>
 
-                            <input type="hidden" name="car_id" value="${car.ID_CAR}">
-                            <input type="hidden" name="car_brand" value="${car.BRAND}">
-                            <input type="hidden" name="car_model" value="${car.MODEL}">
-                            <input type="hidden" name="car_release_year" value="${car.RELEASE_YEAR}">
-                            <input type="hidden" name="car_day_price" value="${car.DAY_PRICE}">
+                        <input type="hidden" name="car_id" value="${car.ID_CAR}">
+                        <input type="hidden" name="car_brand" value="${car.BRAND}">
+                        <input type="hidden" name="car_model" value="${car.MODEL}">
+                        <input type="hidden" name="car_release_year" value="${car.RELEASE_YEAR}">
+                        <input type="hidden" name="car_day_price" value="${car.DAY_PRICE}">
 
                             <button type="submit" class="btn-reservar">Reservar</button>
                             <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
@@ -438,6 +438,95 @@ if(datesContainer){
 
         }catch(error){
             alert(dateResult.error || dateResult.message)
+        }
+    });
+}
+
+// Disponibilidad de fechas del coche seleccionado
+
+if(datesContainer){
+
+    console.log("1")
+    document.addEventListener("DOMContentLoaded", async () => {
+
+        console.log("2")
+
+        // Obtener el token JWT de localStorage
+        const token = localStorage.getItem("jwtToken");
+
+        const selectedCarAvailability = JSON.parse(sessionStorage.getItem("selectedCarAvailability"));
+
+        const id_car = selectedCarAvailability['id']
+
+        console.log("3")
+
+
+
+        try{
+            console.log("4")
+
+            const dateResponse = await fetch(API_BASE_URL + 'disponibilidad.php', {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify({ id_car })
+            });
+
+            console.log("5")
+
+        
+            const dateResult = await dateResponse.json();
+
+            console.log("6")
+
+
+            if(!dateResponse.ok){
+
+                console.log("7")
+
+
+                datesContainer.innerHTML = `<p>${dateResult.message}</p>`;
+            }else{
+
+                console.log("8")
+
+                // Limpiar el contenedor antes de agregar las tarjetas
+                datesContainer.innerHTML = "";
+
+                // Recorrer el array de reservas
+                dateResult.dates.forEach(date => {
+                    // Crear la estructura de la tarjeta
+                    console.log("9")
+
+                    const cardHTML = `
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card border-primary mb-3">
+                                    <div class="card-header bg-primary text-white">Reserva #${date.ID_BOOKING}</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-calendar-check"></i> Fechas de la reserva</h5>
+                                        <p class="card-text"><strong>Fecha de inicio:</strong> ${date.DATE_START}</p>
+                                        <p class="card-text"><strong>Fecha de fin:</strong> ${date.DATE_FINISH}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    `;
+
+                    // Insertar la tarjeta en el contenedor
+                    datesContainer.innerHTML += cardHTML;
+                });
+                console.log("10")
+
+            }
+
+        }catch(error){
+            alert("Ha habido un error al seleccionar la disponibilidad de fechas: " + error.message)
+            console.error(error.message)
         }
     });
 }
