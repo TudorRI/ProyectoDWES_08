@@ -541,7 +541,7 @@ if (detailsContainer){
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
                         <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
-                        <button onclick="window.location.href='../public/payment.html'" id="fillInformation">Rellenar información personal</button>                    
+                        <button onclick="window.location.href='../public/payment.html'" id="fillInformation">Ir a pasarela de pago</button>                    
                     </div>
                 `
             }else{
