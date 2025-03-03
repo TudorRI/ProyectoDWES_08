@@ -1,6 +1,8 @@
 <?php
 require '../config/config.php';
 require '../vendor/autoload.php';
+require '../api/auth.php';
+
 
 use Firebase\JWT\JWT;
 
@@ -13,6 +15,8 @@ error_reporting(E_ALL);
 /*ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');*/
+
+$userData = verificarToken(); // Verificamos el token
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -55,6 +59,6 @@ if ($booking) {
     exit;
 } else {
     http_response_code(200);
-    echo json_encode(["message" => "Fechas seleccionadas con éxito."]);
+    echo json_encode(["success" => "Fechas seleccionadas con éxito."]);
 }
 

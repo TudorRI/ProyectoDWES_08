@@ -43,9 +43,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-error_log($user['PASSWORD']);
-error_log($user['ID_USER']);
-
 if ($user) {
 
     if (password_verify($password, $user['PASSWORD'])) {

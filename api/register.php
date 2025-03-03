@@ -17,15 +17,13 @@ ini_set('error_log', __DIR__ . '/errors.log');*/
 
 // Obtener datos del frontend
 $data = json_decode(file_get_contents("php://input"), true);
+
 $name = $data['name'];
 $lastname = $data['lastname'];
 $phone = $data['phone'];
 $email = $data['email'];
 $password = $data['password'];
 $confirmPassword = $data['confirmPassword'];
-
-error_log($password);
-error_log($confirmPassword);
 
 // Validación de datos
 if (empty($name) || empty($lastname) || empty($phone) || empty($email) || empty($password)) {
@@ -88,7 +86,7 @@ try {
     $pdo->commit();
 
     echo json_encode([
-        "message" => "Usuario registrado exitosamente",
+        "success" => "Registro exitoso. Serás redirigido al login.",
         "token" => $token
     ]);
 } catch (Exception $e) {

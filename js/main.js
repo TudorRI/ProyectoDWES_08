@@ -47,17 +47,16 @@ if (loginForm){
                 // Si el servidor devuelve un token, lo guardamos
                 if(result.token){
                     localStorage.setItem('jwtToken', result.token);
-                    alert("Inicio de sesion exitoso");
+                    alert(result.success || result.message);
                     window.location.href= '../public/index.html'; // Redirigimos al index
                 }else{
-                    alert("No se recibio ningun token. Verifica la API");
+                    alert(result.error || result.message);
                 }
             }else{
-                alert(result.message || "Error al iniciar sesion");
+                alert(result.error || result.message);
             }    
         } catch (error){
-            console.error('Error:', error);
-            alert('Ocurrió un error al conectar con el servidor');
+            alert(result.error || result.message);
         }
     
     });
@@ -88,14 +87,13 @@ if (registerForm){
             const result = await response.json();
     
             if (response.ok) {
-                alert("Registro exitoso. Serás redirigido al login.");
+                alert(result.success || result.message);
                 window.location.href = '../public/login.html'; // Redirigimos al login
             } else {
-                alert(result.error || "Error en el registro.");
+                alert(result.error || result.message);
             }
         } catch (error) {
-            console.error("Error de conexión:", error);
-            alert("No se pudo conectar con el servidor. Inténtalo más tarde.");
+            alert(result.error || result.message);
         }
     });
 }
@@ -141,8 +139,8 @@ if (userDataContainer) {
                     </div> 
                 `;
             } else {
-                console.error("Error en la respuesta del servidor:", userData.message);
-                userDataContainer.innerHTML = `<p>Error: ${userData.message}</p>`;
+                console.error("Error en la respuesta del servidor:", userData.error);
+                userDataContainer.innerHTML = `<p>${userData.error}</p>`;
             }
 
         } catch (error) {
@@ -174,7 +172,7 @@ if(userBookingsContainer){
             const userBookings = await response.json();
 
             if(!response.ok){
-                userBookingsContainer.innerHTML = `<p>${userBookings.message}</p>`;
+                userBookingsContainer.innerHTML = `<p>${userBookings.message || userBookings.error}</p>`;
             }else{
                 // Limpiar el contenedor antes de agregar las tarjetas
                 userBookingsContainer.innerHTML = "";
@@ -224,8 +222,7 @@ if(userBookingsContainer){
                                     alert(cancelResult.message || cancelResult.error); // Mostrar mensaje de error
                                 }
                             } catch (error) {
-                                console.error("Error al cancelar la reserva:", error);
-                                alert("Error al cancelar la reserva.");
+                                alert(cancelResult.error || cancelResult.message);
                             }
                         }
                     });
@@ -242,8 +239,7 @@ if(userBookingsContainer){
             }
 
         } catch (error) {
-            console.error("Error al obtener las reservas:", error);
-            userBookingsContainer.innerHTML = `<p>Error al cargar las reservas del usuario.</p>`;
+            userBookingsContainer.innerHTML = `<p>${userBookings.error || userBookings.message}</p>`;
         }
     });
 }
@@ -259,10 +255,15 @@ if (contactMessage){
         const email = document.getElementById('email').value;
         const mensaje = document.getElementById('mensaje').value;
 
+        const token = localStorage.getItem("jwtToken");
+
         try{
             const response = await fetch(API_BASE_URL + 'emailContact.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
                 body:JSON.stringify({ nombre, email, mensaje })
             });
 
@@ -272,10 +273,10 @@ if (contactMessage){
                 alert(result.message || result.success);
                 contactMessage.reset();
             }else{
-                alert("Error: " + result.message);
+                alert(result.message || result.error);
             }
         } catch(error){
-            alert("Error al enviar el mensaje: " + error.message);
+            alert(result.error || result.message);
 
         }
     });
@@ -284,12 +285,21 @@ if (contactMessage){
 // Sección Coches
 if (carContainer) {
     document.addEventListener("DOMContentLoaded", async () => {
+
+        const token = localStorage.getItem("jwtToken");
+
         try {
-            const response = await fetch(API_BASE_URL + "cars.php");
+            const response = await fetch(API_BASE_URL + "cars.php", {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            });
             const cars = await response.json();
 
             if (!response.ok) {
-                throw new Error("Error al obtener los coches");
+                throw new Error(cars.error || cars.message);
             }
 
             carContainer.innerHTML = ""; // Limpiar el contenedor antes de agregar coches
@@ -366,8 +376,7 @@ if (carContainer) {
                 }
             });
         } catch (error) {
-            console.error("Error:", error);
-            carContainer.innerHTML = "<p>Error al cargar los coches.</p>";
+            carContainer.innerHTML = `<p>${cars.error || cars.message}</p>`;
         }
     });
 }
@@ -398,9 +407,7 @@ if(datesContainer){
             const dateResult = await dateResponse.json();
 
             if(!dateResponse.ok){
-
-
-                datesContainer.innerHTML = `<p>${dateResult.message}</p>`;
+                datesContainer.innerHTML = `<p>${dateResult.message || dateResult.error}</p>`;
             }else{
 
                 // Limpiar el contenedor antes de agregar las tarjetas
@@ -430,8 +437,7 @@ if(datesContainer){
             }
 
         }catch(error){
-            alert("Ha habido un error al seleccionar la disponibilidad de fechas: " + error.message)
-            console.error(error.message)
+            alert(dateResult.error || dateResult.message)
         }
     });
 }
@@ -458,25 +464,31 @@ if(bookingContainer){
             const finalDate = document.getElementById("finalDate").value;
     
             event.preventDefault();
+
+            // Obtener el token JWT de localStorage
+            const token = localStorage.getItem("jwtToken");
     
             try{
                 const response = await fetch(API_BASE_URL + 'availablecar.php',{
                     method:'POST',
-                    headers: { 'Content-Type': 'application/json'},
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
                     body:JSON.stringify({ id_car, initialDate, finalDate })
                 })
     
                 const result = await response.json();
                 if(response.ok){
-                    alert(result.message);
+                    alert(result.message || result.success);
                     const selectedDates = [initialDate, finalDate];
                     sessionStorage.setItem("selectedDates", JSON.stringify(selectedDates));
                     window.location.href= "../public/bookingdetails.html";
                 }else{
-                    alert("Error: " + result.error);
+                    alert(result.error || result.message);
                 }
             }catch(error){
-                alert("Error al seleccionar las fechas: " + error.message);
+                alert(result.message || result.error);
             }
         });
 
@@ -496,12 +508,18 @@ if (detailsContainer){
         const day_price = selectedCar['day_price'];
         const initialDate = selectedDates[0];
         const finalDate = selectedDates[1];
+
+        // Obtener el token JWT de localStorage
+        const token = localStorage.getItem("jwtToken");
         
 
         try{
             const response = await fetch(API_BASE_URL + 'bookingdetails.php', {
                 method:'POST',
-                headers: { 'Content-Type': 'application/json'},
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
                 body:JSON.stringify({ day_price, initialDate, finalDate })
             })
 
@@ -527,10 +545,10 @@ if (detailsContainer){
                     </div>
                 `
             }else{
-                alert("Error: " + result.message);
+                alert(result.error || result.message);
             }
         }catch(error){
-            alert("Error al cargar los detalles de la reserva: " + error.message);
+            alert(result.error || result.message);
         }
     });
 }
@@ -600,12 +618,12 @@ if(paymentForm){
                         alert(emailResult.message || emailResult.error)
                     }
                 }catch(error){
-                    alert("Error en el emailConfirmation: " + error.message)
+                    alert(emailResult.error || emailResult.message)
                 }
             }
 
         }catch(error){
-            alert("Error en el payment: " + error.message)
+            alert(paymentResult.error || paymentForm.message)
 
         }
     })
@@ -616,5 +634,5 @@ if(paymentForm){
 if(successContainer){
     setTimeout(() => {
         window.location.href = "../public/index.html"; // Redirige tras unos segundos a la pagina principal
-    }, 4000);
+    }, 5000);
 }

@@ -2,6 +2,8 @@
 
 require '../config/config.php';
 require '../vendor/autoload.php';
+require '../api/auth.php';
+
 
 use Firebase\JWT\JWT;
 
@@ -15,6 +17,8 @@ error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');*/
 
+$userData = verificarToken(); // Verificamos el token
+
 try {
 
     $sql = "SELECT ID_CAR, BRAND, MODEL, RELEASE_YEAR, DAY_PRICE FROM CAR WHERE AVAILABLE = 1";
@@ -26,7 +30,6 @@ try {
     }
     echo json_encode($cars);
 } catch (PDOException $e) {
-    error_log("Error en la base de datos: " . $e->getMessage());
-    echo json_encode(["error" => "Error en la base de datos"]);
+    echo json_encode(["error" => "Hubo un problema al cargar los coches. Inténtelo de nuevo más tarde."]);
     exit;
 }

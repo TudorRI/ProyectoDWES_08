@@ -33,7 +33,7 @@ function verificarToken()
     } catch (Exception $e) {
         // Si la decodificación falla (token inválido, expirado, etc.), devolvemos un error 401
         http_response_code(401);
-        echo json_encode(["error" => "Token inválido"]);
+        echo json_encode(["error" => "Ocurrió un problema con la autenticación. Inténtalo más tarde."]);
         exit; // Detenemos la ejecución
     }
 }

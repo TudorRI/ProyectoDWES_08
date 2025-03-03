@@ -17,7 +17,7 @@ require '../api/auth.php';
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');*/
 
-$userData = verificarToken();
+$userData = verificarToken(); // Verificamos el token
 
 try {
     $user_id = $userData->user_id; // Extraemos el ID del USER
@@ -27,7 +27,9 @@ try {
     $user= $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user){
+        
         // Si existe el usuario recogemos los datos de la consulta y los mandamos al JS con JSON
+        http_response_code(200);
         echo json_encode([
             "name" => $user['NAME'],
             "lastname" => $user['LASTNAME'],
@@ -36,10 +38,10 @@ try {
         ]);
     }else{
         http_response_code(404);
-        echo json_encode(["message" => "Usuario no encontrado"]);
+        echo json_encode(["error" => "Usuario no encontrado."]);
     }
 } catch (Exception $e) {
     http_response_code(401);
-    echo json_encode(["message" => "Token inválido"]);
+    echo json_encode(["error" => "Error en la solicitud. Inténtalo más tarde."]);
 }
 ?>

@@ -17,7 +17,7 @@ require '../api/auth.php';
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/errors.log');*/
 
-$userData = verificarToken();
+$userData = verificarToken(); // Verificamos el token
 
 try {
     $user_id = $userData->user_id; // Extraemos el ID del USER
@@ -55,6 +55,6 @@ try {
     }
 } catch (Exception $e) {
     http_response_code(401);
-    echo json_encode(["message" => "Token inválido"]);
+    echo json_encode(["error" => "Token inválido"]);
 }
 ?>

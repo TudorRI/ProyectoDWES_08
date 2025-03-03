@@ -20,6 +20,7 @@ ini_set('error_log', __DIR__ . '/errors.log');*/
 
 
 $userData = verificarToken(); //Verificamos que el token sea valido
+
 $user_id = $userData->user_id; // Recuperamos del token el user_id
 
 $data = json_decode(file_get_contents("php://input"), true);

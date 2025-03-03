@@ -2,6 +2,7 @@
 
 require '../config/config.php';
 require '../vendor/autoload.php';
+require '../api/auth.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -26,6 +27,8 @@ $dotenv->load();
 
 $smtpMailUsername = $_ENV['SMTP_MAIL_USERNAME'];
 $smtpMailPassword = $_ENV['SMTP_MAIL_PASSWORD'];
+
+$userData = verificarToken(); // Verificamos el token
 
 $data = json_decode(file_get_contents("php://input"), true);
 
