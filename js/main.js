@@ -3,19 +3,13 @@ const API_BASE_URL = "http://localhost:8000/api/";
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const contactMessage =  document.getElementById("contactMessage");
-<<<<<<< HEAD
-const carContainer = document.getElementById("car-list");
-=======
 const carContainer = document.getElementById("carContainer");
->>>>>>> 33f791d (Guardado)
 const bookingDates = document.getElementById("bookingDates");
 const detailsContainer = document.getElementById("detailsContainer");
 const bookingContainer = document.getElementById("bookingContainer");
 const informationContainer =  document.getElementById("informationContainer")
 const informationForm = document.getElementById("informationForm");
 const logoutButton = document.getElementById("logoutButton");
-<<<<<<< HEAD
-=======
 const myAccountButton = document.getElementById("myAccountButton");
 const myBookingsButton = document.getElementById("myBookingsButton");
 const paymentForm = document.getElementById("paymentForm")
@@ -24,7 +18,6 @@ const datesContainer = document.getElementById("datesContainer")
 const userDataContainer = document.getElementById("userDataContainer");
 
 
->>>>>>> 33f791d (Guardado)
 
 
 // Seccion Login
@@ -115,23 +108,15 @@ if (registerForm){
 
 if(logoutButton){
 
-<<<<<<< HEAD
-    logoutButton.addEventListener("onclick", () => {  // Usar "click" en lugar de "onclick"
-
-        localStorage.removeItem("jwtToken")
-=======
     logoutButton.addEventListener("click", () => {  // Usar "click" en lugar de "onclick"
 
         localStorage.removeItem("jwtToken")
         sessionStorage.clear()
->>>>>>> 33f791d (Guardado)
         window.location.href= "../public/login.html"
 
     })
 }
 
-<<<<<<< HEAD
-=======
 // Seccion Mi Perfil
 if (userDataContainer) {
     document.addEventListener("DOMContentLoaded", async () => {
@@ -179,7 +164,6 @@ if(myBookingsButton){
 
 }
 
->>>>>>> 33f791d (Guardado)
 // Seccion Contacto
 if (contactMessage){
 
@@ -192,27 +176,16 @@ if (contactMessage){
         const mensaje = document.getElementById('mensaje').value;
 
         try{
-<<<<<<< HEAD
-            const response = await fetch(API_BASE_URL + 'emailconfirmation.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:JSON.stringify({ nombre, email, mensaje})
-=======
             const response = await fetch(API_BASE_URL + 'emailContact.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body:JSON.stringify({ nombre, email, mensaje })
->>>>>>> 33f791d (Guardado)
             });
 
             const result = await response.json();
 
             if (response.ok){
-<<<<<<< HEAD
-                alert("Mensaje enviado correctamente");
-=======
                 alert(result.message || result.success);
->>>>>>> 33f791d (Guardado)
                 contactMessage.reset();
             }else{
                 alert("Error: " + result.message);
@@ -242,29 +215,26 @@ if (carContainer) {
                 carCard.classList.add("car-card");
 
                 carCard.innerHTML = `
-                    <img src="${API_BASE_URL + car.IMAGE_URL}" alt="${car.MODEL}" class="car-image">
-                    <form class="car-form">
-                        <div class="car-info">
-                            <h2>${car.BRAND} ${car.MODEL}</h2>
-                            <p><strong>Marca:</strong> ${car.BRAND}</p>
-                            <p><strong>Modelo:</strong> ${car.MODEL}</p>
-                            <p><strong>Año de lanzamiento:</strong> ${car.RELEASE_YEAR}</p>
-                            <p><strong>Precio por día:</strong> ${car.DAY_PRICE}€</p>
+                <img src="${API_BASE_URL + car.IMAGE_URL}" alt="${car.MODEL}" class="car-image">
+                <form class="car-form">
+                    <div class="car-info">
+                        <h2>${car.BRAND} ${car.MODEL}</h2>
+                        <p><strong>Marca:</strong> ${car.BRAND}</p>
+                        <p><strong>Modelo:</strong> ${car.MODEL}</p>
+                        <p><strong>Año de lanzamiento:</strong> ${car.RELEASE_YEAR}</p>
+                        <p><strong>Precio por día:</strong> ${car.DAY_PRICE}€</p>
 
-                            <input type="hidden" name="car_id" value="${car.ID_CAR}">
-                            <input type="hidden" name="car_brand" value="${car.BRAND}">
-                            <input type="hidden" name="car_model" value="${car.MODEL}">
-                            <input type="hidden" name="car_release_year" value="${car.RELEASE_YEAR}">
-                            <input type="hidden" name="car_day_price" value="${car.DAY_PRICE}">
+                        <input type="hidden" name="car_id" value="${car.ID_CAR}">
+                        <input type="hidden" name="car_brand" value="${car.BRAND}">
+                        <input type="hidden" name="car_model" value="${car.MODEL}">
+                        <input type="hidden" name="car_release_year" value="${car.RELEASE_YEAR}">
+                        <input type="hidden" name="car_day_price" value="${car.DAY_PRICE}">
 
-                            <button type="submit" class="btn-reservar">Reservar</button>
-<<<<<<< HEAD
-                            <button type="button" class="btn-contacto">Contactar</button>
-=======
-                            <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
->>>>>>> 33f791d (Guardado)
-                        </div>
-                    </form>
+                        <button type="submit" class="btn-reservar">Reservar</button>
+                        <button type="button" class="btn-contacto" id="verDisponibilidadBtn-${car.ID_CAR}">Ver disponibilidad</button>
+                        <button type="button" class="btn-detalles" id="verDetallesBtn-${car.ID_CAR}">Ver detalles</button>
+                    </div>
+                </form>
                 `;
 
                 carContainer.appendChild(carCard);
@@ -291,8 +261,6 @@ if (carContainer) {
                     window.location.href = "../public/calendar.html";
                 });
             });
-<<<<<<< HEAD
-=======
 
             // Agregar evento click a los botones "Ver disponibilidad"
             cars.forEach(car => {
@@ -314,7 +282,6 @@ if (carContainer) {
                     });
                 }
             });
->>>>>>> 33f791d (Guardado)
         } catch (error) {
             console.error("Error:", error);
             carContainer.innerHTML = "<p>Error al cargar los coches.</p>";
@@ -322,8 +289,6 @@ if (carContainer) {
     });
 }
 
-<<<<<<< HEAD
-=======
 // Disponibilidad de fechas del coche seleccionado
 
 if(datesContainer){
@@ -413,7 +378,6 @@ if(datesContainer){
     });
 }
 
->>>>>>> 33f791d (Guardado)
 // Seccion de fechas para el coche seleccionado
 
 if(bookingContainer){
@@ -425,11 +389,8 @@ if(bookingContainer){
         document.getElementById("initialDate").setAttribute("min", today);
         document.getElementById("finalDate").setAttribute("min", today);
 
-<<<<<<< HEAD
-=======
         
 
->>>>>>> 33f791d (Guardado)
         bookingDates.addEventListener('submit',  async(event) =>{
 
             const selectedCar =  JSON.parse(sessionStorage.getItem("selectedCar"));
@@ -449,20 +410,12 @@ if(bookingContainer){
     
                 const result = await response.json();
                 if(response.ok){
-<<<<<<< HEAD
-                    alert("Fechas seleccionadas con exito");
-=======
                     alert(result.message);
->>>>>>> 33f791d (Guardado)
                     const selectedDates = [initialDate, finalDate];
                     sessionStorage.setItem("selectedDates", JSON.stringify(selectedDates));
                     window.location.href= "../public/bookingdetails.html";
                 }else{
-<<<<<<< HEAD
-                    alert("Error: " + result.message);
-=======
                     alert("Error: " + result.error);
->>>>>>> 33f791d (Guardado)
                 }
             }catch(error){
                 alert("Error al seleccionar las fechas: " + error.message);
@@ -511,13 +464,9 @@ if (detailsContainer){
                         <label for="release_year"><strong>Año:</strong> ${selectedCar.release_year || "N/A"}</label><br>
                         <label for="day_price"><strong>Precio por día:</strong> ${selectedCar.day_price}€</label><br>
                         <label for="days"><strong>Cantidad de dias a reservar:</strong> ${days}</label><br>
-<<<<<<< HEAD
-                        <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>                    </div>
-=======
                         <label for="total"><strong>Total de la reserva:</strong> ${total + "€"}</label><br><br>
                         <button onclick="window.location.href='../public/bookingInformation.html'" id="fillInformation">Rellenar información personal</button>                    
                     </div>
->>>>>>> 33f791d (Guardado)
                 `
             }else{
                 alert("Error: " + result.message);
@@ -529,17 +478,12 @@ if (detailsContainer){
 }
 
 
-<<<<<<< HEAD
-=======
 // Seccion de datos de la persona que reserva
 
->>>>>>> 33f791d (Guardado)
 if (informationContainer){
 
     document.addEventListener("DOMContentLoaded", function () {
         const informationForm = document.getElementById("informationForm");
-<<<<<<< HEAD
-=======
         let checkbox = document.getElementById("infoCheckUser");
         const inputs = informationForm.querySelectorAll("input:not([type='checkbox'])") // Con esta sentencia seleccionaremos todos los inputs del formulario excpeto los checkboxes
 
@@ -549,7 +493,6 @@ if (informationContainer){
                 input.disabled = checkbox.checked;
             });
         });
->>>>>>> 33f791d (Guardado)
     
         if (informationForm) {
             informationForm.addEventListener("submit", async (event) => {
@@ -559,10 +502,6 @@ if (informationContainer){
                 let infoLastName = document.getElementById("infoLastName").value;
                 let infoEmail = document.getElementById("infoEmail").value;
                 let infoPhone = document.getElementById("infoPhone").value;
-<<<<<<< HEAD
-                let checkbox = document.getElementById("infoCheckUser");
-=======
->>>>>>> 33f791d (Guardado)
                 let infoCheckUser = checkbox.checked;
     
                 // Obtener el token JWT de localStorage
@@ -586,12 +525,6 @@ if (informationContainer){
                             infoEmail = userData.email;
                             infoPhone = userData.phone;
                             alert("Informacion de usuario recibida correctamente");
-<<<<<<< HEAD
-                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
-                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
-
-=======
->>>>>>> 33f791d (Guardado)
                             window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
                         } else {
                             alert("Error al obtener los datos del usuario.");
@@ -613,11 +546,6 @@ if (informationContainer){
         
                         if (response.ok) {
                             alert("Mensaje enviado correctamente");
-<<<<<<< HEAD
-                            const selectedInformation = [infoName, infoLastName, infoEmail, infoPhone];
-                            sessionStorage.setItem("selectedInformation", JSON.stringify(selectedInformation))
-=======
->>>>>>> 33f791d (Guardado)
                             informationForm.reset();
                             window.location.href = "../public/payment.html" // Redirigimos a la pasarela de pago
                         } else {
@@ -632,8 +560,6 @@ if (informationContainer){
     });
 }
 
-<<<<<<< HEAD
-=======
 // Seccion de pago y de realizacion de la reserva
 
 if(paymentForm){
@@ -717,4 +643,12 @@ if(successContainer){
     }, 4000);
 }
 
->>>>>>> 33f791d (Guardado)
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-detalles").forEach(button => {
+        button.addEventListener("click", function () {
+            const carId = this.id.split("-")[1]; // Obtener el ID del coche
+            window.location.href = `rental1.html?id=${carId}`;
+        });
+    });
+});
